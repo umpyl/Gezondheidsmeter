@@ -1,0 +1,39 @@
+.register_content {
+    max-width: initial;
+    width: 100%;
+    padding: 15px 0px 0px;
+    background-color: #BFEAFA;
+    padding-bottom: 35px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.hoofd_txt {
+    text-align: center;
+}
+
+.form-field {
+    text-align: center;
+    padding: 10px;
+}
+
+.submit {
+    display: block;
+    padding: 5px 10px 5px 10px;
+    margin: 0px;
+    margin-left: 5px;
+    border: solid 2px white;
+    border-radius: 10px;
+    background-clip: padding-box;
+    text-decoration: none;
+    background-color: #28B8ED;
+    color: white;
+    width: 68%;
+    font-size: 15px;
+    margin: 0 auto;
+    font-weight: bold;
+    padding: 8px;
+    border: none;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
