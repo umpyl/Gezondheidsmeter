@@ -1,11 +1,26 @@
+body {
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
 .register_content {
-    max-width: initial;
+    background-color: yellow;
     width: 100%;
+}
+
+.register_form {
+    max-width: initial;
+    width: 50%;
     padding: 15px 0px 0px;
-    background-color: #BFEAFA;
     padding-bottom: 35px;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
+    background-color: red;
+    box-sizing: border-box;
+    margin-top: 150px;
+    margin-right: 100%;
 }
 
 .hoofd_txt {
@@ -14,7 +29,16 @@
 
 .form-field {
     text-align: center;
-    padding: 10px;
+    padding: 4px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.input_reg {
+    border-radius: 10px;
+    padding: 3px;
+    background-color: white;
+    border: 1px solid #ccc;
 }
 
 .submit {
@@ -26,9 +50,8 @@
     border-radius: 10px;
     background-clip: padding-box;
     text-decoration: none;
-    background-color: #28B8ED;
-    color: white;
-    width: 68%;
+    background-color: white;
+    width: 35%;
     font-size: 15px;
     margin: 0 auto;
     font-weight: bold;
@@ -36,4 +59,27 @@
     border: none;
     padding-top: 15px;
     padding-bottom: 15px;
+    cursor: pointer;
+    color: black;
+}
+
+.pumping-heart {
+    position: absolute;
+    top: 50%;
+    right: 22%;
+    animation: pulse 1s infinite;
+    width: 80px;
+    fill: red;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.3);
+    }
 }
