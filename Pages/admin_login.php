@@ -1,6 +1,6 @@
 <?php
 session_start();
-require "../Particles/conn.php";
+require "Particles/conn.php";
 
 if (isset($_POST["submit"])) {
     $naam = $_POST["username"];
