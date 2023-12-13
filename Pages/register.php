@@ -1,6 +1,33 @@
 <?php
 session_start();
 require "../Particles/conn.php";
+
+if (isset($_POST["submit"])) {
+    $Name = $_POST["Name"];
+    $Mail = $_POST["Mail"];
+    $Password = hash('sha256', $Password = $_POST["Password"]);
+    $Geslacht = $_POST["Geslacht"];
+
+    $sql = "INSERT INTO gezond_users (Name, Mail, Password, Geslacht) VALUES (?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt) {
+        $stmt->bind_param("ssss", $Name, $Mail, $Password, $Geslacht);
+        $stmt->execute();
+
+        if ($stmt->affected_rows > 0) {
+            echo "Registratie Gelukt";
+        } else {
+            echo "Registratie Gefaald";
+        }
+
+        $stmt->colse();
+    } else {
+        echo "Error in DB";
+    }
+
+    $conn->close();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +36,7 @@ require "../Particles/conn.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registreren</title>
-    <link rel="stylesheet" href="../Assets/CSS/register.css">
+    <link rel="stylesheet" href="../../Assets/CSS/register.css">
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 
@@ -25,32 +52,32 @@ require "../Particles/conn.php";
                 <h1>Registeren</h1>
             </div>
             <div class="form-field">
-                <label for="username">Naam:</label><span><br>
-                    <input type="text" id="username" name="_username" class="input_reg" autocomplete="off" required />
+                <label for="Name">Naam:</label><span><br>
+                    <input type="text" id="Name" name="Name" class="input_reg" autocomplete="off" required />
                 </span>
             </div>
             <div class="form-field">
-                <label for="email">Email:</label><span><br>
-                    <input type="text" id="email" name="_email" class="input_reg" autocomplete="off" required />
+                <label for="Mail">Email:</label><span><br>
+                    <input type="text" id="Mail" name="Mail" class="input_reg" autocomplete="off" required />
                 </span>
             </div>
             <div class="form-field">
-                <label for="credentials">Wachtwoord:</label><span><br>
-                    <input type="password" id="credentials" name="_passwd" class="input_reg" autocomplete="off" required />
+                <label for="Password">Wachtwoord:</label><span><br>
+                    <input type="Password" id="Password" name="Password" class="input_reg" autocomplete="off" required />
                 </span>
             </div>
             <div class="form-field">
                 <label for="credentials">Geslacht:</label><span><br>
-                    <input type="radio" id="man" name="gender" required />
+                    <input type="radio" id="man" name="Geslacht" required />
                     <label for="man">Man</label>
 
-                    <input type="radio" id="vrouw" name="gender" required />
+                    <input type="radio" id="vrouw" name="Geslacht" required />
                     <label for="vrouw">Vrouw</label>
                 </span>
             </div>
             <div class="form-submit">
                 <div class="form-submit-button">
-                    <button class="submit" value="Submit"><b>Registreren</b></button>
+                    <button name="submit" class="submit" type="submit" value="Submit"><b>Registreren</b></button>
                 </div>
             </div>
 
