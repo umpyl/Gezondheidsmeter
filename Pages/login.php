@@ -1,12 +1,14 @@
 <?php
 session_start();
 require "../Particles/conn.php";
+$connectionClass = new Connection();
+$connection = $connectionClass->setConnection();
 
 if (isset($_POST["submit"])) {
     $naam = $_POST["username"];
     $hashed_password = hash('sha256', $password = $_POST["password"]);
 
-    $stmt = $connection->prepare("SELECT * FROM `ste_medewerkers` WHERE `naam` = ? AND `wachtwoord` = ?");
+    $stmt = $connection->prepare("SELECT * FROM `gezond_users` WHERE `Name` = ? AND `Password` = ?");
     $stmt->bind_param("ss", $naam, $hashed_password);
 
     $stmt->execute();
@@ -14,16 +16,16 @@ if (isset($_POST["submit"])) {
 
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
-        if ($row["admin"] == 1) {
+        if ($row["Admin"] == 1) {
 
             $_SESSION["naam"] = $naam;
             $_SESSION["admin"] = true;
-            header("Location: Admin/index.php");
+            header("Location: ../admin/Homepage.php");
             exit();
         } else {
             $_SESSION["naam"] = $naam;
             $_SESSION["admin"] = false;
-            header("Location: Medewerker/index.php");
+            header("Location: ../gebruiker/Homepage.php");
             exit();
         }
     } else {
