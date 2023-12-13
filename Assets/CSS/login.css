@@ -1,0 +1,142 @@
+html,
+body {
+	height: 100%;
+}
+
+form {
+	min-width: 30%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	grid-row: 4;
+	background-color: #f0f0f0;
+	padding: 3rem 10%;
+	margin: 0 2rem;
+	border-radius: 0.5rem;
+}
+
+button {
+	margin: 1rem 0;
+}
+
+.container {
+	height: 100%;
+	display: grid;
+	grid-template-rows: auto 1fr auto auto auto 1fr auto;
+	justify-items: center;
+	align-items: start;
+}
+
+.headerwrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+	grid-row: 2;
+	height: 100%;
+	width: 100%;
+}
+
+.header-placeholder {
+	opacity: 0;
+	padding-bottom: 10%;
+}
+
+.header {
+	position: absolute;
+	top: 25%;
+}
+
+.form-group {
+	padding-top: 15px;
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 1.5rem;
+}
+
+.form-group > input {
+	min-width: fit-content;
+	width: 100%;
+	padding: 10px;
+	border: none;
+	outline: none;
+	border-bottom: 1px solid #999;
+	box-sizing: border-box;
+	font-size: 16px;
+	position: relative;
+	z-index: 5;
+	background: none;
+}
+
+.invalide > input {
+	border-bottom: 1px solid #e92c2c;
+}
+
+.invalide > input::placeholder {
+	color: #e92c2c;
+}
+
+.valide > input {
+	border-bottom: 1px solid #7de558;
+}
+
+.valide > input::placeholder {
+	color: #7de558;
+}
+
+.form-group > label {
+	position: absolute;
+	left: 10px;
+	top: 45%;
+	transition: ease-out 0.25s;
+	color: #999;
+	opacity: 0;
+}
+
+.underline {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 3px;
+	background: #7de558;
+	left: -100%;
+	transition: ease-out 0.25s;
+	opacity: 0;
+	z-index: 6;
+}
+
+.form-group > input:focus ~ label,
+.form-group > input:valid ~ label {
+	top: 0px;
+	transform: scale(0.94) translateX(-2px);
+	color: #7de558;
+	opacity: 1;
+	z-index: 5;
+	font-weight: bold;
+}
+
+.invalide > .underline {
+	background: #e92c2c;
+}
+
+.invalide > input:focus ~ label,
+.invalide > input:valid ~ label {
+	top: 0px;
+	transform: scale(0.94) translateX(-2px);
+	color: #e92c2c;
+	opacity: 1;
+	z-index: 5;
+	font-weight: bold;
+}
+
+.form-group > input:focus ~ .underline,
+.form-group > input:valid ~ .underline {
+	left: 0;
+	opacity: 1;
+}
+
+.link {
+	text-align: center;
+}
