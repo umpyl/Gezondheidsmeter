@@ -8,11 +8,14 @@ $stmt = $connection->prepare("SELECT * FROM `gezond_questions`");
 $stmt->execute();
 $result = $stmt->get_result();
 
-if($result->num_rows >= 1){
+$question = "No questions found"; // Default value
+
+if ($result->num_rows >= 1) {
     $row = $result->fetch_assoc();
-    $question = $row["Questions"];
-}else {
-    $question = "No questions found"; 
+
+    if (isset($row["Question"])) {
+        $question = $row["Question"];
+    }
 }
 
 //Vraag aanmaken

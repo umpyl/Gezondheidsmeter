@@ -18,12 +18,12 @@ if (isset($_POST["submit"])) {
         $row = $result->fetch_assoc();
         if ($row["Admin"] == 1) {
 
-            $_SESSION["naam"] = $naam;
+            $_SESSION["idUsers"] = $row["idUsers"];
             $_SESSION["admin"] = true;
             header("Location: ../admin/Homepage.php");
             exit();
         } else {
-            $_SESSION["naam"] = $naam;
+            $_SESSION["idUsers"] = $row["isUsers"];
             $_SESSION["admin"] = false;
             header("Location: ../gebruiker/Homepage.php");
             exit();
