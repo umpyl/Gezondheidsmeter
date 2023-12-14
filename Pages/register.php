@@ -1,6 +1,39 @@
 <?php
 session_start();
 require "../Particles/conn.php";
+$connectionClass = new Connection();
+$connection = $connectionClass->setConnection();
+
+if (isset($_POST["submit"])) {
+    $Name = $_POST["Name"];
+    $Mail = $_POST["Mail"];
+    $Password = hash('sha256', $Password = $_POST["Password"]);
+
+    $sql = "INSERT INTO `gezond_users` (Name, Mail, Password) VALUES ('$Name', '$Mail', '$Password')";
+    $result = mysqli_query($connection, $sql);
+
+    if ($result) {
+        echo "<html>
+        <head>
+            <title>Laden...</title>
+            <script>
+                setTimeout(function() {
+                    window.location.href = '../Pages/login.php';
+                }, 3000); // 3000 milliseconds = 3 seconds
+            </script>
+        </head>
+        <body>
+            <div style='text-align: center; padding: 50px;'>
+                <h2>Aan het laden...</h2>
+                <!-- leuek elemente invoegen -->
+            </div>
+        </body>
+      </html>";
+exit;
+    } else {
+        echo "Niet gelukt! Raadpleeg ontwikkelaar";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,32 +58,24 @@ require "../Particles/conn.php";
                 <h1>Registeren</h1>
             </div>
             <div class="form-field">
-                <label for="username">Naam:</label><span><br>
-                    <input type="text" id="username" name="_username" class="input_reg" autocomplete="off" required />
+                <label for="Name">Naam:</label><span><br>
+                    <input type="text" id="Name" name="Name" class="input_reg" autocomplete="off" required />
                 </span>
             </div>
             <div class="form-field">
-                <label for="email">Email:</label><span><br>
-                    <input type="text" id="email" name="_email" class="input_reg" autocomplete="off" required />
+                <label for="Mail">Email:</label><span><br>
+                    <input type="text" id="Mail" name="Mail" class="input_reg" autocomplete="off" required />
                 </span>
             </div>
             <div class="form-field">
-                <label for="credentials">Wachtwoord:</label><span><br>
-                    <input type="password" id="credentials" name="_passwd" class="input_reg" autocomplete="off" required />
+                <label for="Password">Wachtwoord:</label><span><br>
+                    <input type="Password" id="Password" name="Password" class="input_reg" autocomplete="off" required />
                 </span>
             </div>
-            <div class="form-field">
-                <label for="credentials">Geslacht:</label><span><br>
-                    <input type="radio" id="man" name="gender" required />
-                    <label for="man">Man</label>
-
-                    <input type="radio" id="vrouw" name="gender" required />
-                    <label for="vrouw">Vrouw</label>
-                </span>
-            </div>
+            <br>
             <div class="form-submit">
                 <div class="form-submit-button">
-                    <button class="submit" value="Submit"><b>Registreren</b></button>
+                    <button name="submit" class="submit" type="submit" value="Submit"><b>Registreren</b></button>
                 </div>
             </div>
 
