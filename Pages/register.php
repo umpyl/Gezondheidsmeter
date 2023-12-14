@@ -1,32 +1,38 @@
 <?php
 session_start();
 require "../Particles/conn.php";
+$connectionClass = new Connection();
+$connection = $connectionClass->setConnection();
 
 if (isset($_POST["submit"])) {
     $Name = $_POST["Name"];
     $Mail = $_POST["Mail"];
     $Password = hash('sha256', $Password = $_POST["Password"]);
-    $Geslacht = $_POST["Geslacht"];
 
-    $sql = "INSERT INTO gezond_users (Name, Mail, Password, Geslacht) VALUES (?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
+    $sql = "INSERT INTO `gezond_users` (Name, Mail, Password) VALUES ('$Name', '$Mail', '$Password')";
+    $result = mysqli_query($connection, $sql);
 
-    if ($stmt) {
-        $stmt->bind_param("ssss", $Name, $Mail, $Password, $Geslacht);
-        $stmt->execute();
-
-        if ($stmt->affected_rows > 0) {
-            echo "Registratie Gelukt";
-        } else {
-            echo "Registratie Gefaald";
-        }
-
-        $stmt->colse();
+    if ($result) {
+        echo "<html>
+        <head>
+            <title>Laden...</title>
+            <script>
+                setTimeout(function() {
+                    window.location.href = '../Pages/login.php';
+                }, 3000); // 3000 milliseconds = 3 seconds
+            </script>
+        </head>
+        <body>
+            <div style='text-align: center; padding: 50px;'>
+                <h2>Aan het laden...</h2>
+                <!-- leuek elemente invoegen -->
+            </div>
+        </body>
+      </html>";
+exit;
     } else {
-        echo "Error in DB";
+        echo "Niet gelukt! Raadpleeg ontwikkelaar";
     }
-
-    $conn->close();
 }
 ?>
 <!DOCTYPE html>
@@ -36,7 +42,7 @@ if (isset($_POST["submit"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registreren</title>
-    <link rel="stylesheet" href="../../Assets/CSS/register.css">
+    <link rel="stylesheet" href="../Assets/CSS/register.css">
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 
@@ -66,15 +72,7 @@ if (isset($_POST["submit"])) {
                     <input type="Password" id="Password" name="Password" class="input_reg" autocomplete="off" required />
                 </span>
             </div>
-            <div class="form-field">
-                <label for="credentials">Geslacht:</label><span><br>
-                    <input type="radio" id="man" name="Geslacht" required />
-                    <label for="man">Man</label>
-
-                    <input type="radio" id="vrouw" name="Geslacht" required />
-                    <label for="vrouw">Vrouw</label>
-                </span>
-            </div>
+            <br>
             <div class="form-submit">
                 <div class="form-submit-button">
                     <button name="submit" class="submit" type="submit" value="Submit"><b>Registreren</b></button>
