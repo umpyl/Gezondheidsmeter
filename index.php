@@ -1,2 +1,2 @@
 <?php
-header('location: ./Pages/inlog.php/');
+header('location: ./Pages/login.php/');
