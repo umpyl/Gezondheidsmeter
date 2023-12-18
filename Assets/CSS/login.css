@@ -31,20 +31,28 @@ button {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
 	position: relative;
 	grid-row: 2;
 	height: 100%;
 	width: 100%;
 }
 
-.header-placeholder {
-	opacity: 0;
-	padding-bottom: 10%;
+.pumping-heart {
+	width: 80px;
+	animation: pulse 1s infinite;
+	fill: red;
 }
 
-.header {
-	position: absolute;
-	top: 25%;
+@keyframes pulse {
+	0%,
+	100% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(1.3);
+	}
 }
 
 .form-group {

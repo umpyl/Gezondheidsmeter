@@ -2,12 +2,10 @@
 
 $url =  $_SERVER['REQUEST_URI'];
 
-$position = strpos($url, "assets");
+$position = strpos($url, "Gezondheidsmeter/");
 
 if ($position !== false) {
-    $url = substr($url, 0, $position);
-} else {
-    // echo "Word not found in the string.";
+    $url = substr($url, 0, $position + strlen("Gezondheidsmeter/"));
 }
 ?>
 
@@ -16,7 +14,13 @@ if ($position !== false) {
     <nav class="navbar">
         <ul>
             <li>
-                <a href="<?php echo $url ?>"><?php echo $url ?></a>
+                <a href="<?php echo $url . "Pages/gebruiker/Homepage.php" ?>"><?php echo $url . "Pages/gebruiker/Homepage.php" ?></a>
+            </li>
+            <li>
+                <a href="<?php echo $url . "Pages/login.php" ?>"><?php echo $url . "Pages/login.php" ?></a>
+            </li>
+            <li>
+                <a href="<?php echo $url . "Pages/register.php" ?>"><?php echo $url . "Pages/register.php" ?></a>
             </li>
         </ul>
     </nav>
