@@ -4,38 +4,51 @@ require "../../Particles/conn.php";
 $connectionClass = new Connection();
 $connection = $connectionClass->setConnection();
 
-$stmt = $connection->prepare("SELECT * FROM `gezond_questions`");
-$stmt->execute();
-$result = $stmt->get_result();
+$sql = "SELECT * FROM `gezond_questions`";
+$result = mysqli_query($connection, $sql);
+if ($result) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $idQuestions = $row['idQuestions'];
+        $Question = $row['Question'];
+        $Daily = $row['Daily'];
+        $category = $row['category'];
 
-$question = "No questions found"; // Default value
-
-if ($result->num_rows >= 1) {
-    $row = $result->fetch_assoc();
-
-    if (isset($row["Question"])) {
-        $question = $row["Question"];
+        echo ' <tr> 
+        <th scope="row">' . $idQuestions . '</th>
+        <td>' . $Question . '</td>
+        <td>' . $Daily . '</td>
+        <td>' . $category . '</td>
+        </tr>';
     }
 }
 
-//Vraag aanmaken
-//alle vragen zien / bewerken
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage admin</title>
 </head>
+
 <body>
-<div id="header">
-    <button name="button_vraag_aanmaken">Vraag aanmaken</button>
-</div>
-<div class="styling">
-    <?php echo $question;?>
-</div>
-    
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Vraag</th>
+                    <th scope="col">Dagelijks</th>
+                    <th scope="col">Categorie</th>
+                    <th scope="col">Actie</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
 </body>
+
 </html>
