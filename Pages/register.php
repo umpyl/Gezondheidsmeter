@@ -44,7 +44,6 @@ if (isset($_POST["submit"])) {
     <title>Registreren</title>
     <link rel="stylesheet" href="../Assets/CSS/index.css">
     <link rel="stylesheet" href="../Assets/CSS/login.css">
-    <link rel="stylesheet" href="../Assets/CSS/register.css">
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 
@@ -54,8 +53,7 @@ if (isset($_POST["submit"])) {
             <svg class="pumping-heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path d="M12 21.35l-1.45-1.32C5.4 14.25 2 11.28 2 7.5 2 4.42 4.42 2 7.5 2 9.43 2 11.11 3.11 12 4.74 12.89 3.11 14.57 2 16.5 2 19.58 2 22 4.42 22 7.5c0 3.78-3.4 6.75-8.55 12.54L12 21.35z" />
             </svg>
-            <h1 class="header">Registeren</h1>
-            <h1 class="header-placeholder">Registeren</h1>
+            <h2 class="header">Registeren</h2>
         </div>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
             <div class="form-group">
@@ -69,11 +67,12 @@ if (isset($_POST["submit"])) {
                 <span class="underline"></span>
             </div>
             <div class="form-group">
-                <input type="Password" id="Password" name="Password" placeholder="Wacht" autocomplete="off" required />
+                <input type="Password" id="Password" name="Password" placeholder="Wachtwoord" autocomplete="off" required />
                 <label for="Password">Wachtwoord</label>
                 <span class="underline"></span>
             </div>
-            <button name="submit" class="submit" type="submit" value="Submit"><b>Registreren</b></button>
+            <button name="submit" type="submit" value="Submit"><b>Registreren</b></button>
+            <a href="login.php" class="link">Al een account? Log hier dan in!</a>
 
         </form>
     </div>
