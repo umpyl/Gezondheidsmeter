@@ -7,10 +7,11 @@ $connection = $connectionClass->setConnection();
 if (isset($_GET['deleteid'])) {
     $idQuestions = $_GET['deleteid'];
 
-    $sql = "DELETE FROM `gezond_users` WHERE idQuestions = $idQuestions";
+    $sql = "DELETE FROM `gezond_questions` WHERE idQuestions = $idQuestions";
     $result = mysqli_query($connection, $sql);
     if ($result) {
-        echo "Verwijderen gelukt";
+        header("Location: ../admin/Homepage.php");
+        exit(); 
     } else {
         die(mysqli_error($connection));
     }
