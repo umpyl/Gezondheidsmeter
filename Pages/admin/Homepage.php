@@ -1,6 +1,8 @@
 <?php
 session_start();
 require "../../Particles/conn.php";
+include "../../Assets/templates/theader.php";
+
 $connectionClass = new Connection();
 $connection = $connectionClass->setConnection();
 
@@ -19,13 +21,14 @@ $categoryResult = $selectstmt->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage admin</title>
-    <link rel="stylesheet" href="../../Assets/CSS/adminhpg.css">
-    <link rel="stylesheet" href="../../Assets/CSS/index.css">
-    <script type="text/javascript" src="../../Assets/JS/adminhpg.js" defer></script>
+    <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/adminhpg.css">
+    <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/index.css">
+    <script type="text/javascript" src="<?php echo $url ?>Assets/JS/adminhpg.js" defer></script>
 </head>
 
 <body>
     <div class="container">
+        <?php displayHeader() ?>
         <div class="questionWrapper">
             <button class="add-button" onclick="redirectToAddQuestion()">Vraag Toevoegen</button>
             <div class="filterList">
@@ -84,13 +87,13 @@ $categoryResult = $selectstmt->get_result();
     </div>
     <script>
         function redirectToAddQuestion() {
-            window.location.href = 'VraagAanmaken.php';
+            window.location.href = '<?php echo $url ?>Pages/admin/VraagAanmaken.php';
         }
 
         function confirmDelete(questionId) {
             let confirmDelete = confirm("Weet je zeker dat je deze vraag wilt verwijderen?");
             if (confirmDelete) {
-                window.location.href = 'VraagDelete.php?deleteid=' + questionId;
+                window.location.href = '<?php echo $url ?>Pages/admin/VraagDelete.php?deleteid=' + questionId;
             }
         }
     </script>

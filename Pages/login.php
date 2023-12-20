@@ -1,6 +1,8 @@
 <?php
 session_start();
 require "../Particles/conn.php";
+include "../Assets/templates/theader.php";
+
 $connectionClass = new Connection();
 $connection = $connectionClass->setConnection();
 
@@ -53,8 +55,8 @@ if (isset($_POST["submit"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../Assets/CSS/login.css">
-    <link rel="stylesheet" href="../Assets/CSS/index.css">
+    <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/login.css">
+    <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/index.css">
     <title>Inlog</title>
 </head>
 
@@ -90,7 +92,7 @@ if (isset($_POST["submit"])) {
                 <span class="underline"></span>
             </div>
             <button name="submit" type="submit"><b>Inloggen</b></button>
-            <a href="register.php" class="link">Nog geen account? Registreer dan hier!</a>
+            <a href="<?php echo $url ?>Pages/register.php" class="link">Nog geen account? Registreer dan hier!</a>
         </form>
     </div>
 </body>
