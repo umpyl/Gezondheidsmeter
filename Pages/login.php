@@ -30,12 +30,12 @@ if (isset($_POST["submit"])) {
 
                 $_SESSION["naam"] = $naam;
                 $_SESSION["admin"] = true;
-                header("Location: ../admin/Homepage.php");
+                header("Location: admin/Homepage.php");
                 exit();
             } else {
                 $_SESSION["naam"] = $naam;
                 $_SESSION["admin"] = false;
-                header("Location: ../gebruiker/Homepage.php");
+                header("Location: gebruiker/Homepage.php");
                 exit();
             }
         } else {
