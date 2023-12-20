@@ -1,23 +1,77 @@
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+#questionList {
+	width: 90%;
+	max-width: 1200px;
 }
 
-th, td {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
+.container {
+	--container-max-width: 60rem;
+	display: grid;
+	grid-template-columns:
+		[full-width-start breakout-left-start]
+		minmax(1rem, 1fr)
+		[content-start breakout-right-start]
+		min(100% - 2rem, var(--container-max-width))
+		[content-end breakout-left-start]
+		minmax(1rem, 1fr)
+		[full-width-end breakout-right-end];
 }
 
-th {
-    background-color: #f2f2f2;
+.questionWrapper {
+	grid-column: content;
+	margin: 3rem 0 0;
+}
+
+.filterList {
+	margin: 0 0 1.5rem;
+}
+
+.filters:not(:last-child) {
+	margin: 0 0 1.5rem;
+}
+
+.filter {
+	padding: 0.25rem 1rem;
+	border-radius: 0.25rem;
+	width: auto;
+}
+
+.filter:hover {
+	transform: scale(1);
+	box-shadow: 0px 0px 0 0;
+}
+
+.filter:not(.active) {
+	background: transparent;
+	color: black;
+}
+
+.filter:not(.active):hover {
+	background-color: #7de55850;
+}
+
+.add-button {
+	margin: 0.5rem 0 1rem;
+}
+
+.question {
+	padding: 0 1rem 2rem;
+}
+
+.question:not(:last-child):not(.noLine) {
+	border-bottom: 1px solid #7de558;
+	margin: 0 0 2rem;
+}
+
+.details > :first-child::after {
+	content: " •";
 }
 
 .action-buttons {
-    display: flex;
+	display: flex;
+	justify-content: space-between;
+	margin: 1rem 0 0;
 }
 
 .action-buttons button {
-    margin-right: 5px;
+	margin-right: 5px;
 }
