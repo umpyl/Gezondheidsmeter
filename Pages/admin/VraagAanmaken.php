@@ -25,7 +25,8 @@ if (isset($_POST["submit"])) {
     $stmt->bind_param("sis", $_POST["question"], $checked_daily, $selected_category);
 
     if ($stmt->execute()) {
-        echo "Its worked";
+        header("Location: ../admin/Homepage.php");
+        exit(); 
     } else {
         echo "somehting went wrong";
     }

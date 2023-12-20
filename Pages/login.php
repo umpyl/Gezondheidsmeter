@@ -30,12 +30,12 @@ if (isset($_POST["submit"])) {
 
                 $_SESSION["naam"] = $naam;
                 $_SESSION["admin"] = true;
-                header("Location: ../admin/Homepage.php");
+                header("Location: admin/Homepage.php");
                 exit();
             } else {
                 $_SESSION["naam"] = $naam;
                 $_SESSION["admin"] = false;
-                header("Location: ../gebruiker/Homepage.php");
+                header("Location: gebruiker/Homepage.php");
                 exit();
             }
         } else {
@@ -53,16 +53,18 @@ if (isset($_POST["submit"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../Assets/CSS/login.css">
-    <link rel="stylesheet" href="../../Assets/CSS/index.css">
+    <link rel="stylesheet" href="../Assets/CSS/login.css">
+    <link rel="stylesheet" href="../Assets/CSS/index.css">
     <title>Inlog</title>
 </head>
 
 <body>
     <div class="container">
         <div class="headerwrapper">
+            <svg class="pumping-heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 14.25 2 11.28 2 7.5 2 4.42 4.42 2 7.5 2 9.43 2 11.11 3.11 12 4.74 12.89 3.11 14.57 2 16.5 2 19.58 2 22 4.42 22 7.5c0 3.78-3.4 6.75-8.55 12.54L12 21.35z" />
+            </svg>
             <h2 class="header">Inloggen</h2>
-            <h2 class="header-placeholder">Inloggen</h2>
         </div>
         <form action="" method="post">
             <div class="form-group <?php if (isset($validName)) {
@@ -87,8 +89,8 @@ if (isset($_POST["submit"])) {
                 <label for="password">Wachtwoord</label>
                 <span class="underline"></span>
             </div>
-            <button name="submit" type="submit">Inloggen</button>
-            <a href="../register.php" class="link">Nog geen account? Registreer dan hier!</a>
+            <button name="submit" type="submit"><b>Inloggen</b></button>
+            <a href="register.php" class="link">Nog geen account? Registreer dan hier!</a>
         </form>
     </div>
 </body>
