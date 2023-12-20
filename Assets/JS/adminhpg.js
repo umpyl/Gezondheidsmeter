@@ -33,10 +33,10 @@ recuringButtons.forEach((button) => {
 			FilterQuestions();
 		}
 
-		// document.startViewTransition(() => {
-		UpdateFilterButtons(recuringFilter, e.target);
-		FilterQuestions();
-		// });
+		document.startViewTransition(() => {
+			UpdateFilterButtons(recuringFilter, e.target);
+			FilterQuestions();
+		});
 	});
 });
 
