@@ -20,7 +20,7 @@ if (isset($_POST["submit"])) {
             <title>Laden...</title>
             <script>
                 setTimeout(function() {
-                    window.location.href = '../Pages/login.php';
+                    window.location.href = '" . $url . "Pages/login.php';
                 }, 3000); // 3000 milliseconds = 3 seconds
             </script>
         </head>
