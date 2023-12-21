@@ -1,6 +1,8 @@
 <?php
 session_start();
 require "../Particles/conn.php";
+include "../Assets/templates/theader.php";
+
 $connectionClass = new Connection();
 $connection = $connectionClass->setConnection();
 
@@ -18,7 +20,7 @@ if (isset($_POST["submit"])) {
             <title>Laden...</title>
             <script>
                 setTimeout(function() {
-                    window.location.href = '../Pages/login.php';
+                    window.location.href = '" . $url . "Pages/login.php';
                 }, 3000); // 3000 milliseconds = 3 seconds
             </script>
         </head>
@@ -42,8 +44,8 @@ if (isset($_POST["submit"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registreren</title>
-    <link rel="stylesheet" href="../Assets/CSS/index.css">
-    <link rel="stylesheet" href="../Assets/CSS/login.css">
+    <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/login.css">
+    <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/index.css">
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 
@@ -72,7 +74,7 @@ if (isset($_POST["submit"])) {
                 <span class="underline"></span>
             </div>
             <button name="submit" type="submit" value="Submit"><b>Registreren</b></button>
-            <a href="login.php" class="link">Al een account? Log hier dan in!</a>
+            <a href="<?php echo $url ?>Pages/login.php" class="link">Al een account? Log hier dan in!</a>
 
         </form>
     </div>

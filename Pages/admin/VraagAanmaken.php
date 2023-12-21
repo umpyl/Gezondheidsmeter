@@ -5,34 +5,33 @@ $connection = $connectionClass->setConnection();
 
 if (isset($_POST["submit"])) {
     $gelukt = 0;
-    if(isset($_POST["daily"])){
+    if (isset($_POST["daily"])) {
         $checked_daily = $_POST["daily"];
-        echo $checked_daily;
-    }else{
+    } else {
         echo "niet gelukt!";
     }
 
-    
-
-    if(isset($_POST["category"])){
+    if (isset($_POST["category"])) {
         $selected_category = $_POST["category"];
         $gelukt = 1;
-    }elseif($gelukt != 1){
+    } elseif ($gelukt != 1) {
         echo "Je hebt geen category ingevuld";
     }
 
-    $stmt = $connection->prepare("INSERT INTO gezond_questions(`Question`,`Daily`,`category`) VALUES (?,?,?)");
-    $stmt->bind_param("sis", $_POST["question"], $checked_daily, $selected_category);
+    $stmt = $connection->prepare("INSERT INTO gezond_questions(`Question`,`Daily`,`category_id`) VALUES (?,?,?)");
+    $stmt->bind_param("sii", $_POST["question"], $checked_daily, $selected_category);
 
     if ($stmt->execute()) {
         header("Location: ../admin/Homepage.php");
-        exit(); 
+        exit();
     } else {
         echo "somehting went wrong";
     }
-
-    
 }
+$selectstmt = $connection->prepare("SELECT id, category FROM `gezond_category`");
+$selectstmt->execute();
+$result = $selectstmt->get_result();
+$rows = $result->fetch_all(MYSQLI_ASSOC);
 
 ?>
 <!DOCTYPE html>
@@ -50,12 +49,9 @@ if (isset($_POST["submit"])) {
         <input type="radio" id="daily" value="1" name="daily" onclick="uncheckNoRadio('daily')" checked>daily</input>
         <input type="radio" id="weekly" value="0" name="daily">weekly</input><br>
 
-        <input type="radio" id="work" name="category" value="work" onclick="uncheckNoRadio('work')" checked>Work</input>
-        <input type="radio" id="sport" name="category" value="sport" onclick="uncheckNoRadio('sport')">Sport</input>
-        <input type="radio" id="diet" name="category" value="diet" onclick="uncheckNoRadio('diet')">Diet</input>
-        <input type="radio" id="drugs" name="category" value="drugs" onclick="uncheckNoRadio('drugs')">Drugs</input>
-        <input type="radio" id="sleep" name="category" value="sleep" onclick="uncheckNoRadio('sleep')">Sleep</input>
-        <input type="radio" id="alcohol" name="category" value="alcohol" onclick="uncheckNoRadio('alcohol')">alcohol</input><br>
+        <?php foreach ($rows as $row) {
+            echo '<input type="radio" id="' . $row["category"] . '" name="category" value="' . $row["id"] . '" onclick="uncheckNoRadio(\'' . $row["category"] . '\')">' . $row["category"] . '</input>';
+        } ?>
         <input type="submit" name="submit">
     </form>
 </body>

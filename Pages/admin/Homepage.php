@@ -1,11 +1,17 @@
 <?php
 session_start();
 require "../../Particles/conn.php";
+include "../../Assets/templates/theader.php";
+
 $connectionClass = new Connection();
 $connection = $connectionClass->setConnection();
 
 $sql = "SELECT * FROM `gezond_questions`";
-$result = mysqli_query($connection, $sql);
+$questionResult = mysqli_query($connection, $sql);
+
+$selectstmt = $connection->prepare("SELECT id, category FROM `gezond_category`");
+$selectstmt->execute();
+$categoryResult = $selectstmt->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -15,56 +21,79 @@ $result = mysqli_query($connection, $sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage admin</title>
-    <link rel="stylesheet" href="../Assets/CSS/adminhpg.css">
+    <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/adminhpg.css">
+    <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/index.css">
+    <script type="text/javascript" src="<?php echo $url ?>Assets/JS/adminhpg.js" defer></script>
 </head>
 
 <body>
     <div class="container">
-        <button class="add-button" onclick="redirectToAddQuestion()">Vraag Toevoegen</button>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Vraag</th>
-                    <th>Dagelijks</th>
-                    <th>Categorie</th>
-                    <th>Actie</th>
-                </tr>
-            </thead>
-            <tbody>
+        <?php displayHeader() ?>
+        <div class="questionWrapper">
+            <button class="add-button" onclick="redirectToAddQuestion()">Vraag Toevoegen</button>
+            <div class="filterList">
+                <div id="categoryFilter" class="filters">
+                    <button class="filter active" data-category="All">All</button>
+                    <?php while ($row = mysqli_fetch_array($categoryResult)) : ?>
+                        <button class="filter" data-category="<?php echo $row["category"] ?>"><?php echo $row["category"] ?></button>
+                    <?php endwhile; ?>
+                </div>
+                <div id="recuringFilter" class="filters">
+                    <button class="filter active" data-recuring="All">All</button>
+                    <button class="filter" data-recuring="Daily">Dagelijks</button>
+                    <button class="filter" data-recuring="Weekly">Wekelijks</button>
+                </div>
+            </div>
+            <ul id="questionList">
                 <?php
-                if ($result) {
-                    while ($row = mysqli_fetch_assoc($result)) {
+                if ($questionResult) {
+                    if ($questionResult->num_rows == 0) : ?>
+                        <h2>There are no questions at the moment</h2>
+                    <?php endif ?>
+                    <?php
+                    $index = 0;
+                    while ($row = mysqli_fetch_assoc($questionResult)) {
                         $idQuestions = $row['idQuestions'];
                         $Question = $row['Question'];
                         $Daily = $row['Daily'];
                         $category = $row['category'];
-
-                        echo '<tr>
-                            <td>' . $idQuestions . '</td>
-                            <td>' . $Question . '</td>
-                            <td>' . $Daily . '</td>
-                            <td>' . $category . '</td>
-                            <td class="action-buttons">
-                                <button class="update"><a href="VraagUpdate.php? updateid=' . $idQuestions . '">Bewerken</a></button>
-                                <button class="delete"><a href="#" onclick="confirmDelete(' . $idQuestions . ')">Verwijderen</a></button>
-                            </td>
-                        </tr>';
+                        $index++;
+                    ?>
+                        <li class="question" data-recuring="<?php if ($Daily == 1) {
+                                                                echo "Daily";
+                                                            } else {
+                                                                echo "Weekly";
+                                                            } ?>" data-category="<?php echo $category ?>" style="view-transition-name: conf-<?php echo $index ?>">
+                            <div class="details">
+                                <span><?php if ($Daily == 1) {
+                                            echo "Daily";
+                                        } else {
+                                            echo "Weekly";
+                                        } ?></span>
+                                <span><?php echo $category ?></span>
+                            </div>
+                            <h2><?php echo $Question ?></h2>
+                            <div class="action-buttons">
+                                <a href="VraagUpdate.php? updateid=<?php echo $idQuestions ?>"><button class="update">Bewerken</button></a>
+                                <a href="#" onclick="confirmDelete(<?php echo $idQuestions ?>)"><button class="delete">Verwijderen</button></a>
+                            </div>
+                        </li>
+                <?php
                     }
                 }
                 ?>
-            </tbody>
-        </table>
+            </ul>
+        </div>
     </div>
     <script>
         function redirectToAddQuestion() {
-            window.location.href = 'VraagAanmaken.php';
+            window.location.href = '<?php echo $url ?>Pages/admin/VraagAanmaken.php';
         }
 
         function confirmDelete(questionId) {
             let confirmDelete = confirm("Weet je zeker dat je deze vraag wilt verwijderen?");
             if (confirmDelete) {
-                window.location.href = 'VraagDelete.php?deleteid=' + questionId;
+                window.location.href = '<?php echo $url ?>Pages/admin/VraagDelete.php?deleteid=' + questionId;
             }
         }
     </script>
