@@ -27,6 +27,51 @@ a {
 	color: inherit;
 }
 
+header {
+	z-index: 1;
+	background: white;
+	position: sticky;
+	top: 0;
+}
+
 .header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	justify-content: space-between;
 	grid-column: full-width;
+	border-bottom: 3px solid #7de558;
+	margin: 0 0 2rem;
+}
+
+.logo {
+	/* height: 100%;
+	aspect-ratio: 1 / 1;
+	border-radius: 50%;
+	background: conic-gradient(from -90deg, green 60deg, orange 60deg, orange 120deg, red 120deg, red 180deg, transparent 180deg, transparent); */
+}
+
+.header ul {
+	display: flex;
+	gap: 1rem;
+}
+
+.header ul button {
+	border-radius: 0;
+}
+
+.header button:hover {
+	transform: scale(1);
+	box-shadow: 0px 0px 0 0;
+}
+
+.header button:not(.active) {
+	background: transparent;
+	color: black;
+}
+
+.header button:not(.active):hover {
+	background-color: #7de55850;
 }
