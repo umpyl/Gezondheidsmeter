@@ -31,11 +31,11 @@ header {
 	z-index: 1;
 	background: white;
 	position: sticky;
-	top: 0;
+	transition: 500ms;
 }
 
 .header {
-	position: fixed;
+	position: sticky;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -44,6 +44,10 @@ header {
 	grid-column: full-width;
 	border-bottom: 3px solid #7de558;
 	margin: 0 0 2rem;
+}
+
+.header.headerDown {
+	transform: translate(0, -100%);
 }
 
 .logo {

@@ -35,7 +35,7 @@ $categoryResult = $selectstmt->get_result();
                 <div id="categoryFilter" class="filters">
                     <button class="filter active" data-category="All">All</button>
                     <?php while ($row = mysqli_fetch_array($categoryResult)) : ?>
-                        <button class="filter" data-category="<?php echo $row["category"] ?>"><?php echo $row["category"] ?></button>
+                        <button class="filter" data-category="<?php echo ucfirst($row["category"]) ?>"><?php echo ucfirst($row["category"]) ?></button>
                     <?php endwhile; ?>
                 </div>
                 <div id="recuringFilter" class="filters">
@@ -56,7 +56,7 @@ $categoryResult = $selectstmt->get_result();
                         $idQuestions = $row['idQuestions'];
                         $Question = $row['Question'];
                         $Daily = $row['Daily'];
-                        $category = $row['category'];
+                        $category = ucfirst($row["category"]);
                         $index++;
                     ?>
                         <li class="question" data-recuring="<?php if ($Daily == 1) {

@@ -1,11 +1,19 @@
 const header = document.getElementById("header");
-const scrollWatcher = document.createElement("div");
+let lastScroll = 0;
 
-scrollWatcher.setAttribute("data-scroll-watcher", "");
-header.before(scrollWatcher);
+window.addEventListener("scroll", () => {
+	const currentScroll = window.scrollY;
+	if (currentScroll <= 0) {
+		header.classList.remove("headerUp");
+		return;
+	}
 
-const headerObserver = new IntersectionObserver((entries) => {
-	header.classList.toggle("sticking", !entries[0].isIntersecting);
+	if (currentScroll > lastScroll && !header.classList.contains("headerDown")) {
+		console.log(currentScroll);
+		header.classList.add("headerDown");
+	} else if (currentScroll < lastScroll && header.classList.contains("headerDown")) {
+		header.classList.remove("headerDown");
+	}
+
+	lastScroll = currentScroll;
 });
-
-headerObserver.observe(scrollWatcher);
