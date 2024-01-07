@@ -41,7 +41,7 @@
 
 .filter:not(.active) {
 	background: transparent;
-	color: black;
+	color: inherit;
 }
 
 .filter:not(.active):hover {

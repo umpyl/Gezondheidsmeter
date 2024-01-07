@@ -1,5 +1,8 @@
 <?php
+session_start();
 require "../../Particles/conn.php";
+include "../../Assets/templates/theader.php";
+
 $connectionClass = new Connection();
 $connection = $connectionClass->setConnection();
 
@@ -40,31 +43,50 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/index.css">
+    <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/vragenAanmaken.css">
     <title>Vraag aanmaken</title>
 </head>
 
 <body>
-    <form action="" method="POST">
-        <input type="text" id="question" name="question"><br>
-        <input type="radio" id="daily" value="1" name="daily" onclick="uncheckNoRadio('daily')" checked>daily</input>
-        <input type="radio" id="weekly" value="0" name="daily">weekly</input><br>
-
-        <?php foreach ($rows as $row) {
-            echo '<input type="radio" id="' . $row["category"] . '" name="category" value="' . $row["id"] . '" onclick="uncheckNoRadio(\'' . $row["category"] . '\')">' . $row["category"] . '</input>';
-        } ?>
-        <input type="submit" name="submit">
-    </form>
+    <div class="wrapper">
+        <?php displayHeader(); ?>
+    </div>
+    <div class="wrapper">
+        <form action="" method="POST">
+            <div class="form-group">
+                <input type="text" id="question" name="question" placeholder="Question" required>
+                <label for="question">Question</label>
+                <span class="underline"></span>
+            </div>
+            <div class="form-group">
+                <h2>Herhaling</h2>
+                <div class="optionsWrapper">
+                    <div class="optionWrapper">
+                        <input type="radio" id="daily" value="1" name="daily" checked>
+                        <label for="daily">Daily</label>
+                    </div>
+                    <div class="optionWrapper">
+                        <input type="radio" id="weekly" value="0" name="daily">
+                        <label for="weekly">Weekly</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <h2>Categorie</h2>
+                <div class="optionsWrapper">
+                    <?php foreach ($rows as $row) {
+                        echo '<div class="optionWrapper">
+                        <input type="radio" id="' . $row["category"] . '" name="category" value="' . $row["id"] . '">
+                    <label for="' . $row["category"] . '">' . ucfirst($row["category"]) . '</label> 
+                    </div>
+                    ';
+                    } ?>
+                </div>
+            </div>
+            <button type="submit" name="submit">Submit</button>
+        </form>
+    </div>
 </body>
 
 </html>
-
-<script>
-    function uncheckNoRadio(category) {
-        var yesRadio = document.getElementById(category + "_yes");
-        var noRadio = document.getElementById(category);
-
-        if (yesRadio.checked) {
-            noRadio.checked = false;
-        }
-    }
-</script>

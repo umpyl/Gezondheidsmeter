@@ -9,7 +9,6 @@ window.addEventListener("scroll", () => {
 	}
 
 	if (currentScroll > lastScroll && !header.classList.contains("headerDown")) {
-		console.log(currentScroll);
 		header.classList.add("headerDown");
 	} else if (currentScroll < lastScroll && header.classList.contains("headerDown")) {
 		header.classList.remove("headerDown");
