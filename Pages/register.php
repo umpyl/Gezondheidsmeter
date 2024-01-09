@@ -17,20 +17,20 @@ if (isset($_POST["submit"])) {
     if ($result) {
         echo "<html>
         <head>
-            <title>Laden...</title>
-            <script>
-                setTimeout(function() {
-                    window.location.href = '" . $url . "Pages/login.php';
-                }, 3000); // 3000 milliseconds = 3 seconds
-            </script>
+        <title>Laden...</title>
+        <script>
+        setTimeout(function() {
+            window.location.href = '" . $url . "Pages/login.php';
+        }, 3000); // 3000 milliseconds = 3 seconds
+        </script>
         </head>
         <body>
-            <div style='text-align: center; padding: 50px;'>
-                <h2>Aan het laden...</h2>
-                <!-- leuek elemente invoegen -->
-            </div>
+        <div style='text-align: center; padding: 50px;'>
+        <h2>Aan het laden...</h2>
+        <!-- leuek elemente invoegen -->
+        </div>
         </body>
-      </html>";
+        </html>";
         exit;
     } else {
         echo "Niet gelukt! Raadpleeg ontwikkelaar";

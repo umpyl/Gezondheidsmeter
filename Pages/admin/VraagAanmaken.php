@@ -46,6 +46,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
     <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/index.css">
     <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/vragenAanmaken.css">
     <title>Vraag aanmaken</title>
+    <script type="text/javascript" src="<?php echo $url ?>Assets/JS/dropdown.js" defer></script>
 </head>
 
 <body>
@@ -75,13 +76,18 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
             <div class="form-group">
                 <h2>Categorie</h2>
                 <div class="optionsWrapper">
-                    <?php foreach ($rows as $row) {
-                        echo '<div class="optionWrapper">
-                        <input type="radio" id="' . $row["category"] . '" name="category" value="' . $row["id"] . '">
-                    <label for="' . $row["category"] . '">' . ucfirst($row["category"]) . '</label> 
+                    <div class="dropdown">
+                        <input type="text" class="filter" placeholder="Search">
+                        <div class="optionWrapper">
+                            <?php foreach ($rows as $row) {
+                                echo '<div>
+                            <input type="radio" id="' . $row["category"] . '" class="dropdownContent" name="category" value="' . $row["id"] . '">
+                        <label for="' . $row["category"] . '">' . ucfirst($row["category"]) . '</label>
+                        </div>
+                        ';
+                            } ?>
+                        </div>
                     </div>
-                    ';
-                    } ?>
                 </div>
             </div>
             <button type="submit" name="submit">Submit</button>
