@@ -1,6 +1,8 @@
 <?php
 session_start();
-include "../../Assets/templates/theader.php"
+include "../../Assets/templates/theader.php";
+
+
 ?>
 
 <!DOCTYPE html>
@@ -14,6 +16,12 @@ include "../../Assets/templates/theader.php"
 
 <body>
     <?php displayHeader() ?>
+
+    <form action="vragen.php" method="get">
+        <input type="hidden" name="dataToSend" value="Hello World">
+        <input type="submit" name="daily" value="daily">
+        <input type="submit" name="weekly" value="weekly">
+    </form>
 </body>
 
 </html>

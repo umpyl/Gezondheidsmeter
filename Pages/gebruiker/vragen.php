@@ -1,3 +1,36 @@
+ <?php 
+session_start();
+require "../../Particles/conn.php";
+include "../../Assets/templates/theader.php";
+
+$connectionClass = new Connection();
+$connection = $connectionClass->setConnection();
+
+$receivedData;
+if(isset($_GET['dataToSend'])) {
+    if(isset($_GET['daily'])){
+        $receivedData = 1;
+    }else if(isset($_GET["weekly"])){
+        $receivedData = 0;
+    }else{
+        $receivedData = "no data received";
+    }
+    
+    echo "Received Data: $receivedData";
+} else {
+    echo "No data received.";
+}
+
+
+if($receivedData == "daily"){
+    $selectdaily =  $connection->prepare("SELECT FROM `gezond_questions` WHERE `Daily` = ?");
+    $selectdaily->bind_param("i",$receivedData);
+
+}else{
+    $selectweekly = $connection->prepare("SELECT FROM `gezond_questions` WHERE `Daily` = ?");
+    $selectweekly->bind_param("i",$receivedData);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
