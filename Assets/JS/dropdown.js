@@ -34,8 +34,4 @@ for (const dropdown of dropdowns) {
 
 		list.scrollTop = scrollTo;
 	});
-
-	items.addEventListener("changed", (event) => {
-		console.log(event);
-	});
 }

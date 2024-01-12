@@ -13,7 +13,7 @@ if (isset($_POST["submit"])) {
     } else {
         echo "niet gelukt!";
     }
-
+    var_dump($_POST);
     if (isset($_POST["category"])) {
         $selected_category = $_POST["category"];
         $gelukt = 1;
@@ -80,10 +80,10 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                         <input type="text" class="filter" placeholder="Search">
                         <div class="optionWrapper">
                             <?php foreach ($rows as $row) {
-                                echo '<div>
+                                echo '<label>
                             <input type="radio" id="' . $row["category"] . '" class="dropdownContent" name="category" value="' . $row["id"] . '">
                         <label for="' . $row["category"] . '">' . ucfirst($row["category"]) . '</label>
-                        </div>
+                        </label>
                         ';
                             } ?>
                         </div>
