@@ -38,9 +38,9 @@ if (!str_contains($oUrl, "login.php") && !str_contains($oUrl, "register.php")) {
 function displayHeader()
 {
     global $url, $oUrl, $user;
-    GetScripts();
 ?>
     <header id="header" class="header">
+        <?php GetScripts(); ?>
         <div class="logo">
         </div>
         <nav class="navbar">

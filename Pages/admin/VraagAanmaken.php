@@ -50,9 +50,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
 </head>
 
 <body>
-    <div class="wrapper">
-        <?php displayHeader(); ?>
-    </div>
+    <?php displayHeader(); ?>
     <div class="wrapper">
         <form action="" method="POST">
             <div class="form-group">
