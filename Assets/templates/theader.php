@@ -57,7 +57,7 @@ function displayHeader()
                     </div>
                     <div class="toggleButton">
                         <svg viewbox="0 0 24 24">
-                            <path stroke-width="4" d="M12 0c6.623 0 12 5.377 12 12s-5.377 12-12 12-12-5.377-12-12 5.377-12 12-12zm0 1c6.071 0 11 4.929 11 11s-4.929 11-11 11-11-4.929-11-11 4.929-11 11-11z" />
+                            <path stroke-width="4" d="M 11.22 3 A 9 9 0 1 1 11.21 3" />
                         </svg>
                     </div>
                     <div class="moon">

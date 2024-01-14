@@ -128,7 +128,6 @@ form {
 	position: absolute;
 }
 
-#darkmodeToggle:checked ~ .toggle .toggleButton,
 .checkbox .toggle .sun {
 	left: 10%;
 }
@@ -137,18 +136,28 @@ form {
 	left: -50%;
 }
 
+.checkbox .toggle .toggleButton {
+	transition: background-color 250ms, border-color 250ms, 500ms cubic-bezier(0.1, 1.7, 0.76, 1);
+	left: 90%;
+	transform: translate(-100%, -50%);
+}
+
+#darkmodeToggle:checked ~ .toggle .toggleButton {
+	left: 10%;
+	transform: translate(0, -50%);
+}
+
 .checkbox .toggle .toggleButton path {
 	stroke: var(--main-color);
 	fill: var(--main-bright-color);
 }
 
-#darkmodeToggle:checked ~ .toggle .moon,
-.checkbox .toggle .toggleButton {
-	right: 10%;
+#darkmodeToggle:checked ~ .toggle .moon {
+	left: 90%;
 }
 
 .checkbox .toggle .moon {
-	right: -50%;
+	left: 150%;
 }
 
 .header .navbar {
