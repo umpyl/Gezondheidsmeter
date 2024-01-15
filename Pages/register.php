@@ -13,8 +13,7 @@ if (isset($_POST["submit"])) {
 
     $stmt = $connection->prepare("INSERT INTO `gezond_users` (Name, Mail, Password) VALUES (?, ?, ?)");
     $stmt->bind_param("sss", $Name, $Mail, $Password);
-    $stmt->execute();
-    $stmt->close();
+    $result= $stmt->execute();
     
 
     if ($result) {
