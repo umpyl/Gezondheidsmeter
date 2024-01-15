@@ -100,12 +100,17 @@ form {
 } */
 
 .checkbox {
+	--bezier: cubic-bezier(0.09, 2.2, 0.47, 0.99);
 	min-width: 4em;
 	min-height: 40%;
 	aspect-ratio: 2/1;
 	background: var(--secondair-background-color);
 	border-radius: 100vw;
 	overflow: clip;
+}
+
+.checkbox:hover {
+	background: #7de55850;
 }
 
 .checkbox input {
@@ -124,16 +129,24 @@ form {
 	height: 50%;
 	aspect-ratio: 1/1;
 	top: 50%;
-	transform: translate(-0, -50%);
+	transform: translate(-0, -50%) rotate(-135deg);
 	position: absolute;
 }
 
 .checkbox .toggle .sun {
 	left: 10%;
+	transform: translate(-0, -50%) rotate(0deg);
+}
+
+.checkbox .toggle .sun,
+.checkbox .toggle .moon {
+	transition: opacity 150ms, 500ms var(--bezier);
+	transform-origin: center;
 }
 
 #darkmodeToggle:checked ~ .toggle .sun {
 	left: -50%;
+	transform: translate(-0, -50%) rotate(-135deg);
 }
 
 .checkbox .toggle .toggleButton {
@@ -154,10 +167,12 @@ form {
 
 #darkmodeToggle:checked ~ .toggle .moon {
 	left: 90%;
+	transform: translate(-100%, -50%);
 }
 
 .checkbox .toggle .moon {
 	left: 150%;
+	transform: translate(0, -50%) rotate(135deg);
 }
 
 .header .navbar {
