@@ -1,5 +1,12 @@
 const header = document.getElementById("header");
+const observer = new ResizeObserver((mutations) => {
+	mutations.forEach(() => {
+		header.style.setProperty("--header-offset", header.offsetHeight + "px");
+	});
+});
 let lastScroll = 0;
+
+observer.observe(header);
 
 window.addEventListener("scroll", () => {
 	const currentScroll = window.scrollY;

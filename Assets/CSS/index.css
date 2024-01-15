@@ -57,7 +57,7 @@ header {
 	width: 100%;
 	z-index: 1;
 	background: var(--background-color);
-	transition: transform 500ms, background 300ms;
+	transition: top 500ms, background 300ms;
 }
 
 form {
@@ -79,6 +79,7 @@ form {
 }
 
 .header {
+	--header-offset: 0;
 	position: sticky;
 	top: 0;
 	display: flex;
@@ -89,7 +90,7 @@ form {
 }
 
 .header.headerDown {
-	transform: translate(0, -100%);
+	top: calc(0px - var(--header-offset));
 }
 
 /* .logo {
