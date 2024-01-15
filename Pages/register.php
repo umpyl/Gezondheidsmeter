@@ -11,8 +11,11 @@ if (isset($_POST["submit"])) {
     $Mail = $_POST["Mail"];
     $Password = hash('sha256', $Password = $_POST["Password"]);
 
-    $sql = "INSERT INTO `gezond_users` (Name, Mail, Password) VALUES ('$Name', '$Mail', '$Password')";
-    $result = mysqli_query($connection, $sql);
+    $stmt = $connection->prepare("INSERT INTO `gezond_users` (Name, Mail, Password) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $Name, $Mail, $Password);
+    $stmt->execute();
+    $stmt->close();
+    
 
     if ($result) {
         echo "<html>
