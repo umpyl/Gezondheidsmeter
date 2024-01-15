@@ -58,6 +58,7 @@ if (isset($_POST["submit"])) {
     <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/login.css">
     <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/index.css">
     <title>Inlog</title>
+    <?php GetScripts() ?>
 </head>
 
 <body>

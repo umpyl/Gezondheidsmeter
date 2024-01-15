@@ -13,7 +13,7 @@ if (isset($_POST["submit"])) {
     } else {
         echo "niet gelukt!";
     }
-
+    var_dump($_POST);
     if (isset($_POST["category"])) {
         $selected_category = $_POST["category"];
         $gelukt = 1;
@@ -50,9 +50,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
 </head>
 
 <body>
-    <div class="wrapper">
-        <?php displayHeader(); ?>
-    </div>
+    <?php displayHeader(); ?>
     <div class="wrapper">
         <form action="" method="POST">
             <div class="form-group">
@@ -78,15 +76,15 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                 <div class="optionsWrapper">
                     <div class="dropdown">
                         <input type="text" class="filter" placeholder="Search">
-                        <div class="optionWrapper">
+                        <ul class="optionWrapper">
                             <?php foreach ($rows as $row) {
-                                echo '<div>
+                                echo '<li>
                             <input type="radio" id="' . $row["category"] . '" class="dropdownContent" name="category" value="' . $row["id"] . '">
                         <label for="' . $row["category"] . '">' . ucfirst($row["category"]) . '</label>
-                        </div>
+                        </li>
                         ';
                             } ?>
-                        </div>
+                        </ul>
                     </div>
                 </div>
             </div>

@@ -8,13 +8,17 @@ mode = mode === "true" ? true : false;
 
 function UpdateMode() {
 	document.body.setAttribute("theme-mode", mode ? "dark" : "light");
-	toggle.checked = mode;
+	if (toggle !== null) {
+		toggle.checked = mode;
+	}
 }
 
-toggle.addEventListener("change", () => {
-	mode = toggle.checked ? true : false;
-	document.cookie = "DarkMode=" + (toggle.checked ? true : false);
-	UpdateMode();
-});
+if (toggle !== null) {
+	toggle.addEventListener("change", () => {
+		mode = toggle.checked ? true : false;
+		document.cookie = "DarkMode=" + (toggle.checked ? true : false);
+		UpdateMode();
+	});
+}
 
 UpdateMode();
