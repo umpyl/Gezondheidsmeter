@@ -76,15 +76,15 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                 <div class="optionsWrapper">
                     <div class="dropdown">
                         <input type="text" class="filter" placeholder="Search">
-                        <div class="optionWrapper">
+                        <ul class="optionWrapper">
                             <?php foreach ($rows as $row) {
-                                echo '<label>
+                                echo '<li>
                             <input type="radio" id="' . $row["category"] . '" class="dropdownContent" name="category" value="' . $row["id"] . '">
                         <label for="' . $row["category"] . '">' . ucfirst($row["category"]) . '</label>
-                        </label>
+                        </li>
                         ';
                             } ?>
-                        </div>
+                        </ul>
                     </div>
                 </div>
             </div>

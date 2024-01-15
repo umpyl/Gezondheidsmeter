@@ -38,17 +38,17 @@ body {
 	display: none;
 }
 
-.dropdown .optionWrapper > label {
+.dropdown .optionWrapper > li {
 	display: block;
 	padding: 0.5rem 1rem;
 	background: var(--secondair-background-color);
 	filter: brightness(120%);
 }
 
-[theme-mode="light"] .dropdown .optionWrapper > label:hover {
+[theme-mode="light"] .dropdown .optionWrapper > li:hover {
 	filter: brightness(80%);
 }
 
-[theme-mode="dark"] .dropdown .optionWrapper > label:hover {
+[theme-mode="dark"] .dropdown .optionWrapper > li:hover {
 	filter: brightness(150%);
 }

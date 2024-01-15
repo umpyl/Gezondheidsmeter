@@ -12,6 +12,8 @@ $questionResult = mysqli_query($connection, $sql);
 $selectstmt = $connection->prepare("SELECT id, category FROM `gezond_category`");
 $selectstmt->execute();
 $categoryResult = $selectstmt->get_result();
+
+$categories = $categoryResult->fetch_all(MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -35,9 +37,9 @@ $categoryResult = $selectstmt->get_result();
                 <h2>Categorie</h2>
                 <div id="categoryFilter" class="filters">
                     <button class="filter active" data-category="All">All</button>
-                    <?php while ($row = mysqli_fetch_array($categoryResult)) : ?>
+                    <?php foreach ($categories as $row) : ?>
                         <button class="filter" data-category="<?php echo ucfirst($row["category"]) ?>"><?php echo ucfirst($row["category"]) ?></button>
-                    <?php endwhile; ?>
+                    <?php endforeach; ?>
                 </div>
                 <h2>Herhaling</h2>
                 <div id="recuringFilter" class="filters">
@@ -49,6 +51,7 @@ $categoryResult = $selectstmt->get_result();
             <ul id="questionList">
                 <?php
                 if ($questionResult) {
+
                     if ($questionResult->num_rows == 0) : ?>
                         <h2>There are no questions at the moment</h2>
                     <?php endif ?>
@@ -58,7 +61,7 @@ $categoryResult = $selectstmt->get_result();
                         $idQuestions = $row['idQuestions'];
                         $Question = $row['Question'];
                         $Daily = $row['Daily'];
-                        $category = ucfirst($row["category"]);
+                        $category = ucfirst($categories[array_search($row["category_id"], array_column($categories, "id"))]["category"]);
                         $index++;
                     ?>
                         <li class="question" data-recuring="<?php if ($Daily == 1) {
