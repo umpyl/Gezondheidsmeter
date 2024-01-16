@@ -37,6 +37,7 @@ if (isset($_POST["submit"])) {
             } else {
                 $_SESSION["naam"] = $naam;
                 $_SESSION["admin"] = false;
+                $_SESSION["userId"]= $row["idUsers"];
                 header("Location: " . $url . "Pages/gebruiker/Homepage.php");
                 exit();
             }

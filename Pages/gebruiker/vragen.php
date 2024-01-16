@@ -39,6 +39,8 @@
 
     $questionsJson = json_encode($questionsArray);
 
+    $userId = $_SESSION["userId"];
+
 
 
     $questionCount = 0;
@@ -71,6 +73,7 @@
          <div id="midSection">
              <textarea id="questionAnswer"></textarea>
          </div>
+
          <div id="bottomSection">
              <div id="buttons">
                  <button onclick="UpdateCurrentQuestion('prev')" id="prev">Prev</button>
@@ -84,11 +87,14 @@
 
  <script>
      let QuestionCount = <?php echo $questionCount ?>;
+     let userId = <?php echo $userId ?>;
      let questionsArray = <?php echo $questionsJson; ?>;
      let currentQuestion = 1;
      document.getElementById("currentQuestion").innerText = currentQuestion;
      document.getElementById("total").innerText = QuestionCount;
      document.getElementById("question").innerText = questionsArray[currentQuestion - 1].Question;
+     let answer = document.getElementById("questionAnswer").value;
+     console.log(answer);
 
      function UpdateCurrentQuestion(action) {
          if (action === 'prev' && currentQuestion > 1) {
@@ -97,9 +103,39 @@
 
          if (action === 'next' && currentQuestion < QuestionCount) {
              currentQuestion++;
+
+             let questionId = questionsArray[currentQuestion - 1].idQuestions;
+
+             
+
+             
+
+             sendAnswerToServer(questionId, userId, answer);
          }
+
          document.getElementById("question").innerText = questionsArray[currentQuestion - 1].Question;
          document.getElementById("currentQuestion").innerText = currentQuestion;
-         document.getElementById("total").innerText = QuestionCount;
+
+     }
+
+     function sendAnswerToServer(questionId, userId, answer) {
+         fetch('Save_answer.php', {
+                 method: 'POST',
+                 headers: {
+                     'Content-Type': 'application/json',
+                 },
+                 body: JSON.stringify({
+                     'questionIds': questionId,
+                     'userIds': userId,
+                     'answers': answer,
+                 }),
+             })
+             .then(response => response.text())
+             .then(data => {
+                 console.log(data);
+             })
+             .catch(error => {
+                 console.error('Error:', error);
+             });
      }
  </script>

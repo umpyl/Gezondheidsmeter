@@ -18,7 +18,7 @@ include "../../Assets/templates/theader.php";
     <?php displayHeader() ?>
 
     <form action="vragen.php" method="get">
-        <input type="hidden" name="dataToSend" value="Hello World">
+        <input type="hidden" name="dataToSend" value="">
         <input type="submit" name="daily" value="daily">
         <input type="submit" name="weekly" value="weekly">
     </form>
