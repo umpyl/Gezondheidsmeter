@@ -13,8 +13,8 @@ if (isset($_POST["submit"])) {
 
     $stmt = $connection->prepare("INSERT INTO `gezond_users` (Name, Mail, Password) VALUES (?, ?, ?)");
     $stmt->bind_param("sss", $Name, $Mail, $Password);
-    $result= $stmt->execute();
-    
+    $result = $stmt->execute();
+
 
     if ($result) {
         echo "<html>
@@ -46,9 +46,10 @@ if (isset($_POST["submit"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registreren</title>
-    <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/login.css">
     <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/index.css">
+    <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/login.css">
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <?php getScripts() ?>
 </head>
 
 <body>

@@ -10,7 +10,8 @@ button {
 .container {
 	height: 100%;
 	display: grid;
-	grid-template-rows: auto 1fr auto auto auto 1fr auto;
+	grid-template-rows: 1fr auto 1fr;
+	grid-template-columns: auto;
 	justify-items: center;
 	align-items: start;
 }
@@ -21,7 +22,6 @@ button {
 	align-items: center;
 	justify-content: center;
 	position: relative;
-	grid-row: 2;
 	height: 100%;
 	width: 100%;
 }

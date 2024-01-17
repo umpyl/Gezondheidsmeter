@@ -68,6 +68,11 @@ function displayHeader()
                 </div>
             </label>
             <ul>
+                <?php if ($user == 'admin') : ?>
+                    <li>
+                        <a href="<?php echo $url . "Pages/" . $user . "/gebruikers/" ?>"><button <?php if ($oUrl == ($url . "Pages/" . $user . "/gebruikers/")) : ?> class="active" <?php endif ?>>Users</button></a>
+                    </li>
+                <?php endif ?>
                 <li>
                     <a href="<?php echo $url . "Pages/" . $user . "/Homepage.php" ?>"><button <?php if ($oUrl == ($url . "Pages/" . $user . "/Homepage.php")) : ?> class="active" <?php endif ?>>Dashboard</button></a>
                 </li>

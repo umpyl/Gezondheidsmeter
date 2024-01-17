@@ -27,7 +27,7 @@
 
 html,
 body {
-	min-height: 100vh;
+	height: 100svh;
 	background: var(--background-color);
 	color: var(--text-color);
 }
@@ -66,11 +66,25 @@ form {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	grid-row: 4;
 	background-color: var(--secondair-background-color, #f0f0f0);
 	padding: 3rem 10%;
 	margin: 0 2rem;
 	border-radius: 0.5rem;
+}
+
+.container {
+	min-height: 100svh;
+	--container-max-width: 60rem;
+	display: grid;
+	grid-template-columns:
+		[full-width-start breakout-left-start]
+		minmax(1rem, 1fr)
+		[content-start breakout-right-start]
+		min(100% - 2rem, var(--container-max-width))
+		[content-end breakout-left-start]
+		minmax(1rem, 1fr)
+		[full-width-end breakout-right-end];
+	grid-template-rows: auto 1fr;
 }
 
 .wrapper {

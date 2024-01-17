@@ -3,19 +3,6 @@
 	max-width: 1200px;
 }
 
-.container {
-	--container-max-width: 60rem;
-	display: grid;
-	grid-template-columns:
-		[full-width-start breakout-left-start]
-		minmax(1rem, 1fr)
-		[content-start breakout-right-start]
-		min(100% - 2rem, var(--container-max-width))
-		[content-end breakout-left-start]
-		minmax(1rem, 1fr)
-		[full-width-end breakout-right-end];
-}
-
 .questionWrapper {
 	grid-column: content;
 }

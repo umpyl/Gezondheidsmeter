@@ -37,7 +37,7 @@ if (isset($_POST["submit"])) {
             } else {
                 $_SESSION["naam"] = $naam;
                 $_SESSION["admin"] = false;
-                $_SESSION["userId"]= $row["idUsers"];
+                $_SESSION["userId"] = $row["idUsers"];
                 header("Location: " . $url . "Pages/gebruiker/Homepage.php");
                 exit();
             }
@@ -56,8 +56,8 @@ if (isset($_POST["submit"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/login.css">
     <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/index.css">
+    <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/login.css">
     <title>Inlog</title>
     <?php GetScripts() ?>
 </head>
