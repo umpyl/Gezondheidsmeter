@@ -25,25 +25,32 @@ for (const dropdown of dropdowns) {
 		}
 	});
 
+	var scrolable = true;
+
 	list.addEventListener("wheel", (event) => {
-		var items = Array.from(list.children).filter((item) => item.style.display !== "none");
-		var delta = event.deltaY || -event.wheelDelta || event.detail;
-		event.preventDefault();
+		if (scrolable) {
+			scrolable = false;
+			var items = Array.from(list.children).filter((item) => item.style.display !== "none");
+			var delta = event.deltaY || -event.wheelDelta || event.detail;
+			event.preventDefault();
 
-		if (delta > 0) {
-			currentItem = Math.min(currentItem + 1, items.length - 3);
-		} else {
-			currentItem = Math.max(currentItem - 1, 0);
+			if (delta > 0) {
+				currentItem = Math.min(currentItem + 1, items.length - 3);
+			} else {
+				currentItem = Math.max(currentItem - 1, 0);
+			}
+
+			var scrollTo = items[currentItem].offsetTop;
+
+			list.scrollTop = scrollTo;
+			setTimeout(() => {
+				scrolable = true;
+			}, 50);
 		}
-
-		var scrollTo = items[currentItem].offsetTop;
-
-		list.scrollTop = scrollTo;
 	});
 
 	for (const item of items) {
 		if (item.children[0].checked == true) {
-			console.log(item.children[1].innerText);
 			filter.value = item.children[1].innerText;
 		}
 		item.addEventListener("click", () => {
