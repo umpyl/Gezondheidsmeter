@@ -48,6 +48,8 @@
     foreach ($results as $result) {
         $questionCount++;
     }
+    //uncheckn als de op volgende knop is gedrukt.
+    //kijken waarom ik -2 moet doen bij de array
 
 
     ?>
@@ -62,7 +64,7 @@
      <script type="text/javascript" src="../../Assets/JS/vragen.js" defer></script>
  </head>
 
- <body>
+ <body onload="loadQuestion()">
      <div id="wrapper">
          <div id="topSection">
              <div id="counter">
@@ -71,13 +73,14 @@
              <h2 id="question">Question placeholder</h2>
          </div>
          <div id="midSection">
-             <textarea id="questionAnswer"></textarea>
+             <input type="radio" name="yesno" id="yes" value="1">Yes
+             <input type="radio" name="yesno" id="no" value="0">No
          </div>
 
          <div id="bottomSection">
              <div id="buttons">
                  <button onclick="UpdateCurrentQuestion('prev')" id="prev">Prev</button>
-                 <button onclick="UpdateCurrentQuestion('next')" id="next">Next</button>
+                 <button onclick="UpdateCurrentQuestion('next');" id="next">Next</button>
              </div>
          </div>
      </div>
@@ -90,11 +93,25 @@
      let userId = <?php echo $userId ?>;
      let questionsArray = <?php echo $questionsJson; ?>;
      let currentQuestion = 1;
-     document.getElementById("currentQuestion").innerText = currentQuestion;
-     document.getElementById("total").innerText = QuestionCount;
-     document.getElementById("question").innerText = questionsArray[currentQuestion - 1].Question;
-     let answer = document.getElementById("questionAnswer").value;
-     console.log(answer);
+     let answer = 0;
+
+     function loadQuestion() {
+         document.getElementById("currentQuestion").innerText = currentQuestion;
+         document.getElementById("total").innerText = QuestionCount;
+         document.getElementById("question").innerText = questionsArray[currentQuestion - 1].Question;
+     }
+
+     function checkanswer(){
+        let buttons = document.getElementsByName("yesno");
+
+        for(i = 0; i < buttons.length; i++){
+            if(buttons[i].checked){
+                answer = buttons[i].value;
+                break;
+            }
+        }
+     }
+
 
      function UpdateCurrentQuestion(action) {
          if (action === 'prev' && currentQuestion > 1) {
@@ -104,18 +121,13 @@
          if (action === 'next' && currentQuestion < QuestionCount) {
              currentQuestion++;
 
-             let questionId = questionsArray[currentQuestion - 1].idQuestions;
-
-             
-
-             
+             let questionId = questionsArray[currentQuestion - 2].idQuestions;
+             console.log(questionId);
+             checkanswer();
 
              sendAnswerToServer(questionId, userId, answer);
          }
-
-         document.getElementById("question").innerText = questionsArray[currentQuestion - 1].Question;
-         document.getElementById("currentQuestion").innerText = currentQuestion;
-
+         loadQuestion();
      }
 
      function sendAnswerToServer(questionId, userId, answer) {
