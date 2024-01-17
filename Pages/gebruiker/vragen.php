@@ -79,11 +79,11 @@
              <div id="midSection">
                  <label for="yes">
                      <input type="radio" name="yesno" id="yes" value="1">
-                     Yes
+                     <label for="yes">Yes</label>
                  </label>
                  <label for="no">
                      <input type="radio" name="yesno" id="no" value="0">
-                     No
+                     <label for="no">No</label>
                  </label>
              </div>
              <div id="bottomSection">

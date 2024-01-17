@@ -336,3 +336,50 @@ form {
 	left: 0;
 	opacity: 1;
 }
+
+input[type="radio"] {
+	display: none;
+}
+
+input[type="radio"] + label {
+	color: var(--main-color);
+	display: flex;
+	align-items: center;
+	position: relative;
+	cursor: pointer;
+	transition: all 0.25s cubic-bezier(0.25, 0.25, 0.5, 1.9);
+}
+
+input[type="radio"]:hover + label {
+	color: var(--main-bright-color);
+}
+
+input[type="radio"] + label::before {
+	border-radius: 100vw;
+	content: "";
+	position: absolute;
+	left: -1em;
+	width: 1.5rem;
+	height: 1.5rem;
+	background: transparent;
+	border: 2px solid;
+	z-index: -1;
+	transition: all 0.25s cubic-bezier(0.25, 0.25, 0.5, 1.9);
+}
+
+input[type="radio"] + label {
+	padding: 1rem 1rem 1rem 2rem;
+}
+
+input[type="radio"]:checked + label {
+	color: black;
+	padding: 1rem 1.5rem 1rem 1.5rem;
+}
+
+input[type="radio"]:checked + label::before {
+	width: 100%;
+	left: 0;
+	height: 100%;
+	background: var(--main-color);
+	border: 0;
+}
