@@ -35,15 +35,15 @@ $userResult = $userResult->fetch_all(MYSQLI_ASSOC);
                     <div class="form-group">
                         <div class="optionsWrapper">
                             <div class="dropdown">
-                                <label class="filter">admin</label>
+                                <label class="filter"><?= $user["Admin"] == "1" ? "Admin" : "User" ?></label>
                                 <ul class="optionWrapper">
                                     <li>
-                                        <input type="radio" name="<?= $user["idUsers"] ?>" id="admin" value="1" <?php if ($user["Admin"] == "1") : ?> checked <?php endif ?>>
-                                        <label for="admin">Admin</label>
+                                        <input type="radio" name="<?= $user["idUsers"] ?>" id="admin<?= $user["idUsers"] ?>" value="1" <?php if ($user["Admin"] == "1") : ?> checked <?php endif ?>>
+                                        <label for="admin<?= $user["idUsers"] ?>">Admin</label>
                                     </li>
                                     <li>
-                                        <input type="radio" name="<?= $user["idUsers"] ?>" id="user" value="0" <?php if ($user["Admin"] == "0") : ?> checked <?php endif ?>>
-                                        <label for="user">User</label>
+                                        <input type="radio" name="<?= $user["idUsers"] ?>" id="user<?= $user["idUsers"] ?>" value="0" <?php if ($user["Admin"] == "0") : ?> checked <?php endif ?>>
+                                        <label for="user<?= $user["idUsers"] ?>">User</label>
                                     </li>
                                 </ul>
                             </div>
@@ -72,28 +72,40 @@ $userResult = $userResult->fetch_all(MYSQLI_ASSOC);
             for (const filter of filters) {
                 const options = filter.closest('.optionsWrapper').querySelector(".optionWrapper");
 
-                if (!options.contains(event.target) && !filter.contains(event.target)) {
+                if (!filter.contains(event.target)) {
                     options.style.display = "none";
                 }
             }
-            LoadUserRole()
+            LoadUserRole();
         });
 
         function LoadUserRole() {
             const roles = document.querySelectorAll('.filter');
             for (const role of roles) {
                 var options = role.parentNode.querySelector(".optionWrapper").children;
-                for (const option of options) {
-                    console.log("role")
-                    console.log(role.innerHTML)
-                    console.log("option")
-                    console.log(option.children[1].innerHTML)
-                    console.log("checked")
-                    console.log(option.children[0].checked == true)
 
-                    if (option.children[0].checked == true) {
-                        role.innerHTML = option.children[1].innerHTML;
+                for (const option of options) {
+                    if (option.children[0].checked != true) return;
+
+                    role.innerHTML = option.children[1].innerHTML;
+
+                    if (role.innerHTML == option.children[1].innerHTML) return;
+
+                    var data = {
+                        id: option.children[0].name,
+                        role: option.children[0].value,
                     }
+                    fetch("<?= $url ?>Assets/templates/fetch/updateUser.php", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(data),
+                        })
+                        .then((response) => response.json())
+                        .then((data) => {
+
+                        })
                 }
             }
         }
