@@ -56,8 +56,8 @@ if (isset($_POST["submit"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/index.css">
-    <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/login.css">
+    <link rel="stylesheet" href="<?= $url ?>Assets/CSS/index.css">
+    <link rel="stylesheet" href="<?= $url ?>Assets/CSS/login.css">
     <title>Inlog</title>
     <?php GetScripts() ?>
 </head>
@@ -65,9 +65,6 @@ if (isset($_POST["submit"])) {
 <body>
     <div class="container">
         <div class="headerwrapper">
-            <svg class="pumping-heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M12 21.35l-1.45-1.32C5.4 14.25 2 11.28 2 7.5 2 4.42 4.42 2 7.5 2 9.43 2 11.11 3.11 12 4.74 12.89 3.11 14.57 2 16.5 2 19.58 2 22 4.42 22 7.5c0 3.78-3.4 6.75-8.55 12.54L12 21.35z" />
-            </svg>
             <h2 class="header">Inloggen</h2>
         </div>
         <form action="" method="post">
