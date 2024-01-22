@@ -1,6 +1,8 @@
 let currentQuestion = 1;
 let answer = 0;
 
+document.onload = loadQuestion();
+
 function loadQuestion() {
 	document.getElementById("currentQuestion").innerText = currentQuestion;
 	document.getElementById("total").innerText = QuestionCount;

@@ -20,7 +20,6 @@ include "../../Assets/templates/theader.php";
     <div class="container">
         <?php displayHeader() ?>
 
-<<<<<<< Updated upstream
         <div id="wrapper">
             <form action="vragen.php" method="POST">
                 <input type="hidden" name="dataToSend" value="">
@@ -29,13 +28,6 @@ include "../../Assets/templates/theader.php";
             </form>
         </div>
     </div>
-=======
-    <form action="vragen.php" method="GET">
-        <input type="hidden" name="dataToSend" value="">
-        <input type="submit" name="daily" value="daily">
-        <input type="submit" name="weekly" value="weekly">
-    </form>
->>>>>>> Stashed changes
 </body>
 
 </html>

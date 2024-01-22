@@ -96,10 +96,3 @@
  </body>
 
  </html>
-
- <script>
-     let QuestionCount = <?php echo $questionCount ?>;
-     let userId = <?php echo $userId ?>;
-     let questionsArray = <?php echo $questionsJson; ?>;
-     
- </script>
