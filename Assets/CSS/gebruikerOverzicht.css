@@ -23,7 +23,17 @@
 }
 
 .filter {
+	display: block;
 	padding: 0.5rem 0.75rem;
 	background-color: var(--secondair-text-color);
 	color: var(--text-color);
+	transition: 0.3s;
+}
+
+[theme-mode="light"] .filter:hover {
+	filter: brightness(80%);
+}
+
+[theme-mode="dark"] .filter:hover {
+	filter: brightness(120%);
 }

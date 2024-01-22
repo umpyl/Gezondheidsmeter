@@ -38,12 +38,10 @@ $userResult = $userResult->fetch_all(MYSQLI_ASSOC);
                                 <label class="filter"><?= $user["Admin"] == "1" ? "Admin" : "Gebruiker" ?></label>
                                 <ul class="optionWrapper">
                                     <li>
-                                        <input type="radio" name="<?= $user["idUsers"] ?>" id="admin<?= $user["idUsers"] ?>" value="1" <?php if ($user["Admin"] == "1") : ?> checked <?php endif ?>>
-                                        <label for="admin<?= $user["idUsers"] ?>">Admin</label>
+                                        <label id="admin<?= $user["idUsers"] ?>" for="admin<?= $user["idUsers"] ?>" value="1">Admin</label>
                                     </li>
                                     <li>
-                                        <input type="radio" name="<?= $user["idUsers"] ?>" id="user<?= $user["idUsers"] ?>" value="0" <?php if ($user["Admin"] == "0") : ?> checked <?php endif ?>>
-                                        <label for="user<?= $user["idUsers"] ?>">Gebruiker</label>
+                                        <label id="user<?= $user["idUsers"] ?>" for="user<?= $user["idUsers"] ?>" value="0">Gebruiker</label>
                                     </li>
                                 </ul>
                             </div>
@@ -56,18 +54,6 @@ $userResult = $userResult->fetch_all(MYSQLI_ASSOC);
     <script>
         const filters = document.querySelectorAll('.filter');
 
-        for (const filter of filters) {
-            const setOptionsDisplay = () => {
-                const options = filter.closest('.optionsWrapper').querySelector(".optionWrapper");
-
-                options.style.display = options.style.display === "block" ? "none" : "block";
-            };
-
-            filter.addEventListener("click", setOptionsDisplay);
-        }
-
-        document.addEventListener('DOMContentLoaded', LoadUserRole());
-
         document.addEventListener("click", (event) => {
             for (const filter of filters) {
                 const options = filter.closest('.optionsWrapper').querySelector(".optionWrapper");
@@ -76,39 +62,107 @@ $userResult = $userResult->fetch_all(MYSQLI_ASSOC);
                     options.style.display = "none";
                 }
             }
-            LoadUserRole();
         });
 
-        function LoadUserRole() {
-            const roles = document.querySelectorAll('.filter');
-            for (const role of roles) {
-                var options = role.parentNode.querySelector(".optionWrapper").children;
+        for (const filter of filters) {
+            const options = filter.closest('.optionsWrapper').querySelector(".optionWrapper");
+            const setOptionsDisplay = () => {
+                options.style.display = options.style.display === "block" ? "none" : "block";
+            };
 
-                for (const option of options) {
-                    if (option.children[0].checked != true) return;
+            filter.addEventListener("click", setOptionsDisplay);
 
-                    role.innerHTML = option.children[1].innerHTML;
+            Array.from(options.children).forEach((option) => {
+                option.addEventListener("click", async (event) => {
+                    if (filter.innerHTML == option.children[0].innerHTML) return;
+                    if (!await LoadUserRole(option)) return;
+                    console.log("!")
+                    filter.innerHTML = option.children[0].innerHTML;
+                });
+            })
+        }
 
-                    if (role.innerHTML == option.children[1].innerHTML) return;
+        async function LoadUserRole(option) {
+            console.log("Loading user role")
+            var data = {
+                id: option.children[0].getAttribute("value"),
+                filter: option.children[0].innerHTML,
+            }
 
-                    var data = {
-                        id: option.children[0].name,
-                        role: option.children[0].value,
-                    }
-                    fetch("<?= $url ?>Assets/templates/fetch/updateUser.php", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify(data),
-                        })
-                        .then((response) => response.json())
-                        .then((data) => {
+            try {
+                const response = await fetch("<?= $url ?>Assets/templates/fetch/updateUser.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                });
 
-                        })
-                }
+                const responseData = await response.json();
+
+
+                return true;
+            } catch (error) {
+                console.error("Error:", error);
+                return false;
             }
         }
+
+        // const filters = document.querySelectorAll('.filter');
+
+        // for (const filter of filters) {
+        //     const setOptionsDisplay = () => {
+        //         const options = filter.closest('.optionsWrapper').querySelector(".optionWrapper");
+
+        //         options.style.display = options.style.display === "block" ? "none" : "block";
+        //     };
+
+        //     filter.addEventListener("click", setOptionsDisplay);
+        // }
+
+        // document.addEventListener('DOMContentLoaded', LoadUserRole());
+
+        // document.addEventListener("click", (event) => {
+        //     for (const filter of filters) {
+        //         const options = filter.closest('.optionsWrapper').querySelector(".optionWrapper");
+
+        //         if (!filter.contains(event.target)) {
+        //             options.style.display = "none";
+        //         }
+        //     }
+        //     LoadUserRole();
+        // });
+
+        // function LoadUserRole() {
+        //     const roles = document.querySelectorAll('.filter');
+        //     for (const role of roles) {
+        //         var options = role.parentNode.querySelector(".optionWrapper").children;
+
+        //         for (const option of options) {
+        //             if (option.children[0].checked != true) return;
+
+        //             role.innerHTML = option.children[1].innerHTML;
+
+        //             if (role.innerHTML == option.children[1].innerHTML) return;
+
+        //             var data = {
+        //                 id: option.children[0].name,
+        //                 role: option.children[0].value,
+        //             }
+        //             fetch("<?= $url ?>Assets/templates/fetch/updateUser.php", {
+        //                     method: "POST",
+        //                     headers: {
+        //                         "Content-Type": "application/json",
+        //                     },
+        //                     body: JSON.stringify(data),
+        //                 })
+        //                 .then((response) => response.json())
+        //                 .then((data) => {
+
+        //                 })
+        //         }
+        //     }
+        // }
     </script>
 </body>
 
