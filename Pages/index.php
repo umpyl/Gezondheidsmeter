@@ -13,142 +13,112 @@
     <h1>Gezondheidsmeter</h1>
 </div>
 <div class="content">
-<img style="width:250px;" src="https://help.healthycities.org/hc/en-us/article_attachments/209783487/gauge-type1-90-500px.png">
+    <img style="width:250px;"
+         src="https://help.healthycities.org/hc/en-us/article_attachments/209783487/gauge-type1-90-500px.png">
 
-    <div id="slideshow">
-
-        <div class="slide" data-slide-index="0">
-            <div class="category">
-                <h3>Voeding</h3>
-                <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin blandit dictum sollicitudin.
-                    Maecenas nec dignissim leo. Vestibulum ut aliquam tellus. Vivamus at erat aliquet, scelerisq</div>
+    <section id="carousel">
+        <div class="textcarousel">
+            <div>
+                <h2>Voeding</h2>
             </div>
         </div>
-        <div class="slide" data-slide-index="1">
-            <div class="category">
-                <h3>Slaap</h3>
-                <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin blandit dictum sollicitudin.
-                    Maecenas nec dignissim leo. Vestibulum ut aliquam tellus. Vivamus at erat aliquet, scelerisq</div>
+        <div class="textcarousel">
+            <div>
+                <h2>Slaap</h2>
             </div>
         </div>
-        <div class="slide" data-slide-index="2">
-            <div class="category">
-                <h3>Drugs</h3>
-                <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin blandit dictum sollicitudin.
-                    Maecenas nec dignissim leo. Vestibulum ut aliquam tellus. Vivamus at erat aliquet, scelerisq</div>
+        <div class="textcarousel">
+            <div>
+                <h2>Drugs</h2>
             </div>
         </div>
-        <div class="slide" data-slide-index="3">
-            <div class="category">
-                <h3>Sport</h3>
-                <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin blandit dictum sollicitudin.
-                    Maecenas nec dignissim leo. Vestibulum ut aliquam tellus. Vivamus at erat aliquet, scelerisq</div>
+        <div class="textcarousel">
+            <div>
+                <h2>Sport</h2>
             </div>
         </div>
-        <div class="slide" data-slide-index="4">
-            <div class="category">
-                <h3>Werkomstandigheden</h3>
-                <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin blandit dictum sollicitudin.
-                    Maecenas nec dignissim leo. Vestibulum ut aliquam tellus. Vivamus at erat aliquet, scelerisq</div>
+        <div class="textcarousel">
+            <div>
+                <h2>Werkomstandigheden</h2>
+            </div>
+        </div>
+        <div class="textcarousel">
+            <div>
+                <h2>Alcohol</h2>
             </div>
         </div>
 
-        <div class="slide" data-slide-index="5">
-            <div class="category">
-                <h3>Alcohol</h3>
-                <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin blandit dictum sollicitudin.
-                    Maecenas nec dignissim leo. Vestibulum ut aliquam tellus. Vivamus at erat aliquet, scelerisq</div>
-            </div>
-        </div>
-
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
-    </div>
+        <a class="prev" onclick="goToPrevious()">&#10094;</a>
+        <a class="next" onclick="goToNext()">&#10095;</a>
+    </section>
 
 </div>
 <script>
-    let slidesPerGroup = 3;
-    let currentIndex = 0;
-    function sliderSize(x) {
-        if (x === 1) {
-            slidesPerGroup = 1;
-            showSlides();
-        } else if (x === 2) {
-            slidesPerGroup = 2;
-            showSlides();
-        } else {
-            slidesPerGroup = 3;
-            showSlides();
+    var text_items = document.getElementsByClassName("textcarousel");
+    var elementor_check = document.getElementsByClassName("elementor-editor-active");
+    var previous_count, current_count, next_count;
+    var intervalId;
+
+    if (elementor_check.length == 0) {
+        current_count = 0;
+        text_items[current_count].classList.add("current_text");
+        text_items[current_count].classList.add("active_text");
+        text_items[current_count].classList.add("first_text");
+        current_count++;
+
+        for (let index = 1; index < text_items.length; index++) {
+            text_items[index].classList.add("absolute_text");
         }
-    }
 
-    const mobile = window.matchMedia("(max-width: 600px)")
-    const tablet = window.matchMedia("(max-width: 991px)")
-    const laptop = window.matchMedia("(max-width: 992px)")
-    let x = window.matchMedia("(max-width: 600px)");
+        function startCarousel() {
+            intervalId = setInterval(() => {
 
-    sliderSize();
-
-    tablet.addEventListener("change", function() {
-        x = 2;
-        sliderSize(x);
-    })
-
-    laptop.addEventListener("change", function() {
-        x = 3;
-        sliderSize(x);
-    })
-
-    mobile.addEventListener("change", function() {
-        if (mobile.matches) {
-            x = 1;
-        } else {
-            x = 2;
+                updateClasses();
+            }, 5000);
         }
-        sliderSize(x);
-    });
 
+        function updateClasses() {
+            previous_count = count_check(current_count - 1);
+            current_count = count_check(current_count);
+            next_count = count_check(current_count + 1);
+            for (let index = 0; index < text_items.length; index++) {
+                text_items[index].classList.remove("current_text");
+                text_items[index].classList.remove("previous_text");
+                text_items[index].classList.remove("next_text");
+                text_items[index].classList.remove("active_text");
+            }
+            text_items[previous_count].classList.add("previous_text");
+            text_items[previous_count].classList.add("active_text");
+            text_items[next_count].classList.add("next_text");
+            text_items[next_count].classList.add("active_text");
 
-    // const slidesPerGroup = 3;
-    showSlides();
+            text_items[current_count].classList.add("current_text");
+            text_items[current_count].classList.add("active_text");
 
-    function plusSlides() {
-        let slides = document.getElementsByClassName("slide");
+            current_count++;
+        }
 
-        // Hide the current slides
-        for (let i = currentIndex; i < currentIndex + slidesPerGroup; i++) {
-            let currentSlideIndex = i % slides.length;
-            if (slides[currentSlideIndex]) {
-                slides[currentSlideIndex].style.display = "none";
+        function count_check(count) {
+            if (count >= text_items.length) {
+                return 0;
+            } else if (count < 0) {
+                return text_items.length - 1;
+            } else {
+                return count;
             }
         }
 
-        // Move to the next slide, looping back to the start if necessary
-        currentIndex = (currentIndex + 1) % slides.length;
-
-        // Show the new group of slides
-        for (let i = currentIndex; i < currentIndex + slidesPerGroup; i++) {
-            let currentSlideIndex = i % slides.length; // Ensure wrapping around of indices
-            if (slides[currentSlideIndex]) {
-                slides[currentSlideIndex].style.display = "block";
-            }
-        }
-    }
-
-    function showSlides() {
-        let slides = document.getElementsByClassName("slide");
-
-        for (let i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
+        function goToPrevious() {
+            current_count = count_check(current_count - 2);
+            updateClasses();
         }
 
-        // Display the current group of slides, considering the wrapping around of indices
-        for (let i = 0; i < slidesPerGroup; i++) {
-            let currentSlideIndex = (currentIndex + i) % slides.length;
-            if (slides[currentSlideIndex]) {
-                slides[currentSlideIndex].style.display = "block";
-            }
+        function goToNext() {
+            updateClasses();
         }
+
+        // Start the carousel
+        startCarousel();
     }
 </script>
 </body>
