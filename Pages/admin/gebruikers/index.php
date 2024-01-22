@@ -19,8 +19,8 @@ $userResult = $userResult->fetch_all(MYSQLI_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gebruikers overzicht</title>
-    <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/index.css">
-    <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/gebruikerOverzicht.css">
+    <link rel="stylesheet" href="<?= $url ?>Assets/CSS/index.css">
+    <link rel="stylesheet" href="<?= $url ?>Assets/CSS/gebruikerOverzicht.css">
 
 </head>
 
@@ -35,7 +35,7 @@ $userResult = $userResult->fetch_all(MYSQLI_ASSOC);
                     <div class="form-group">
                         <div class="optionsWrapper">
                             <div class="dropdown">
-                                <label class="filter"><?= $user["Admin"] == "1" ? "Admin" : "User" ?></label>
+                                <label class="filter"><?= $user["Admin"] == "1" ? "Admin" : "Gebruiker" ?></label>
                                 <ul class="optionWrapper">
                                     <li>
                                         <input type="radio" name="<?= $user["idUsers"] ?>" id="admin<?= $user["idUsers"] ?>" value="1" <?php if ($user["Admin"] == "1") : ?> checked <?php endif ?>>
@@ -43,7 +43,7 @@ $userResult = $userResult->fetch_all(MYSQLI_ASSOC);
                                     </li>
                                     <li>
                                         <input type="radio" name="<?= $user["idUsers"] ?>" id="user<?= $user["idUsers"] ?>" value="0" <?php if ($user["Admin"] == "0") : ?> checked <?php endif ?>>
-                                        <label for="user<?= $user["idUsers"] ?>">User</label>
+                                        <label for="user<?= $user["idUsers"] ?>">Gebruiker</label>
                                     </li>
                                 </ul>
                             </div>

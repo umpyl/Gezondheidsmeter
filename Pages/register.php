@@ -46,10 +46,10 @@ if (isset($_POST["submit"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registreren</title>
-    <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/index.css">
-    <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/login.css">
+    <link rel="stylesheet" href="<?= $url ?>Assets/CSS/index.css">
+    <link rel="stylesheet" href="<?= $url ?>Assets/CSS/login.css">
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <?php getScripts() ?>
+    <?= getScripts() ?>
 </head>
 
 <body>
@@ -57,7 +57,7 @@ if (isset($_POST["submit"])) {
         <div class="headerwrapper">
             <h2 class="header">Registeren</h2>
         </div>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+        <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
             <div class="form-group">
                 <input type="text" id="Name" name="Name" placeholder="Naam" autocomplete="off" required />
                 <label for="Name">Naam</label>

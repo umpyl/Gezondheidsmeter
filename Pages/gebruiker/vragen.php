@@ -55,13 +55,13 @@
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>Document</title>
-     <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/vragen.css">
-     <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/index.css">
-     <script type="text/javascript" src="<?php echo $url ?>Assets/JS/vragen.js" defer></script>
+     <link rel="stylesheet" href="<?= $url ?>Assets/CSS/index.css">
+     <link rel="stylesheet" href="<?= $url ?>Assets/CSS/vragen.css">
+     <script type="text/javascript" src="<?= $url ?>Assets/JS/vragen.js" defer></script>
      <script>
-         let QuestionCount = <?php echo $questionCount ?>;
-         let userId = <?php echo $userId ?>;
-         let questionsArray = <?php echo $questionsJson; ?>;
+         let QuestionCount = <?= $questionCount ?>;
+         let userId = <?= $userId ?>;
+         let questionsArray = <?= $questionsJson; ?>;
      </script>
  </head>
 
@@ -71,24 +71,28 @@
          <div id="wrapper">
              <div id="topSection">
                  <div id="counter">
-                     <span id="currentQuestion">2</span><span> of </span><span id="total">10</span>
+                     <span id="currentQuestion">2</span><span> van </span><span id="total">10</span>
                  </div>
                  <h2 id="question">Question placeholder</h2>
              </div>
              <div id="midSection">
-                 <label for="yes">
-                     <input type="radio" name="yesno" id="yes" value="1">
-                     <label for="yes">Yes</label>
-                 </label>
-                 <label for="no">
-                     <input type="radio" name="yesno" id="no" value="0">
-                     <label for="no">No</label>
-                 </label>
+                 <div class="form-group">
+                     <div class="optionsWrapper">
+                         <div class="optionWrapper">
+                             <input type="radio" name="yesno" id="yes" value="1">
+                             <label for="yes">Ja</label>
+                         </div>
+                         <div class="optionWrapper">
+                             <input type="radio" name="yesno" id="no" value="0">
+                             <label for="no">Nee</label>
+                         </div>
+                     </div>
+                 </div>
              </div>
              <div id="bottomSection">
                  <div id="buttons">
-                     <button onclick="UpdateCurrentQuestion('prev')" id="prev">Prev</button>
-                     <button onclick="UpdateCurrentQuestion('next');" id="next">Next</button>
+                     <button onclick="UpdateCurrentQuestion('prev')" id="prev">Vorige</button>
+                     <button onclick="UpdateCurrentQuestion('next');" id="next">Volgende</button>
                  </div>
              </div>
          </div>

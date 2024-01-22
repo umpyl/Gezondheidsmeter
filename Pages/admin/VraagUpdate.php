@@ -37,10 +37,10 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/index.css">
-    <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/vragenAanmaken.css">
+    <link rel="stylesheet" href="<?= $url ?>Assets/CSS/index.css">
+    <link rel="stylesheet" href="<?= $url ?>Assets/CSS/vragenAanmaken.css">
     <title>Vraag aanmaken</title>
-    <script type="text/javascript" src="<?php echo $url ?>Assets/JS/dropdown.js" defer></script>
+    <script type="text/javascript" src="<?= $url ?>Assets/JS/dropdown.js" defer></script>
 </head>
 
 <body>
@@ -48,8 +48,8 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
     <div class="wrapper">
         <form action="" method="POST">
             <div class="form-group">
-                <input type="text" id="question" name="Question" placeholder="Question" value="<?php echo $question['Question']; ?>" required>
-                <label for="question">Question</label>
+                <input type="text" id="question" name="Question" placeholder="Vraag" value="<?php echo $question['Question']; ?>" required>
+                <label for="question">Vraag</label>
                 <span class="underline"></span>
             </div>
             <div class="form-group">
@@ -57,11 +57,11 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                 <div class="optionsWrapper">
                     <div class="optionWrapper">
                         <input type="radio" id="daily" value="1" name="Daily" <?php echo ($question['Daily'] == 1) ? 'checked' : ''; ?>>
-                        <label for="daily">Daily</label>
+                        <label for="daily">Dagelijks</label>
                     </div>
                     <div class="optionWrapper">
                         <input type="radio" id="weekly" value="0" name="Daily" <?php echo ($question['Daily'] == 0) ? 'checked' : ''; ?>>
-                        <label for="weekly">Weekly</label>
+                        <label for="weekly">Wekelijks</label>
                     </div>
                 </div>
             </div>
@@ -69,7 +69,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                 <h2>Categorie</h2>
                 <div class="optionsWrapper">
                     <div class="dropdown">
-                        <input type="text" class="filter" placeholder="Search">
+                        <input type="text" class="filter" placeholder="Zoek">
                         <ul class="optionWrapper">
                             <?php foreach ($rows as $row) { ?>
                                 <li>
@@ -81,7 +81,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                     </div>
                 </div>
             </div>
-            <button type="submit" name="submit">Submit</button>
+            <button type="submit" name="submit">Vraag aanpassen</button>
         </form>
     </div>
 </body>

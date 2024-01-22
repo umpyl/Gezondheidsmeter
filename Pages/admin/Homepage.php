@@ -23,9 +23,9 @@ $categories = $categoryResult->fetch_all(MYSQLI_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage admin</title>
-    <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/adminhpg.css">
-    <link rel="stylesheet" href="<?php echo $url ?>Assets/CSS/index.css">
-    <script type="text/javascript" src="<?php echo $url ?>Assets/JS/adminhpg.js" defer></script>
+    <link rel="stylesheet" href="<?= $url ?>Assets/CSS/adminhpg.css">
+    <link rel="stylesheet" href="<?= $url ?>Assets/CSS/index.css">
+    <script type="text/javascript" src="<?= $url ?>Assets/JS/adminhpg.js" defer></script>
 </head>
 
 <body>
@@ -36,14 +36,14 @@ $categories = $categoryResult->fetch_all(MYSQLI_ASSOC);
             <div class="filterList">
                 <h2>Categorie</h2>
                 <div id="categoryFilter" class="filters">
-                    <button class="filter active" data-category="All">All</button>
+                    <button class="filter active" data-category="All">Alles</button>
                     <?php foreach ($categories as $row) : ?>
-                        <button class="filter" data-category="<?php echo ucfirst($row["category"]) ?>"><?php echo ucfirst($row["category"]) ?></button>
+                        <button class="filter" data-category="<?= ucfirst($row["category"]) ?>"><?= ucfirst($row["category"]) ?></button>
                     <?php endforeach; ?>
                 </div>
                 <h2>Herhaling</h2>
                 <div id="recuringFilter" class="filters">
-                    <button class="filter active" data-recuring="All">All</button>
+                    <button class="filter active" data-recuring="All">Alles</button>
                     <button class="filter" data-recuring="Daily">Dagelijks</button>
                     <button class="filter" data-recuring="Weekly">Wekelijks</button>
                 </div>
@@ -53,7 +53,7 @@ $categories = $categoryResult->fetch_all(MYSQLI_ASSOC);
                 if ($questionResult) {
 
                     if ($questionResult->num_rows == 0) : ?>
-                        <h2>There are no questions at the moment</h2>
+                        <h2>Op het moment zijn er geen vragen</h2>
                     <?php endif ?>
                     <?php
                     $index = 0;
@@ -64,23 +64,25 @@ $categories = $categoryResult->fetch_all(MYSQLI_ASSOC);
                         $category = ucfirst($categories[array_search($row["category_id"], array_column($categories, "id"))]["category"]);
                         $index++;
                     ?>
-                        <li class="question" data-recuring="<?php if ($Daily == 1) {
-                                                                echo "Daily";
-                                                            } else {
-                                                                echo "Weekly";
-                                                            } ?>" data-category="<?php echo $category ?>" style="view-transition-name: conf-<?php echo $index ?>">
+                        <li class="question" data-recuring="<?php if ($Daily == 1) : ?>
+                                                                Dagelijks
+                                                            <?php else : ?>
+                                                               Wekelijks
+                                                            <?php endif ?>" data-category="<?= $category ?>" style="view-transition-name: conf-<?= $index ?>">
                             <div class="details">
-                                <span><?php if ($Daily == 1) {
-                                            echo "Daily";
-                                        } else {
-                                            echo "Weekly";
-                                        } ?></span>
-                                <span><?php echo $category ?></span>
+                                <span>
+                                    <?php if ($Daily == 1) : ?>
+                                        Dagelijks
+                                    <?php else : ?>
+                                        Wekelijks
+                                    <?php endif ?>
+                                </span>
+                                <span><?= $category ?></span>
                             </div>
-                            <h2><?php echo $Question ?></h2>
+                            <h2><?= $Question ?></h2>
                             <div class="action-buttons">
-                                <a href="VraagUpdate.php? updateid=<?php echo $idQuestions ?>"><button class="update">Bewerken</button></a>
-                                <a href="#" onclick="confirmDelete(<?php echo $idQuestions ?>)"><button class="delete">Verwijderen</button></a>
+                                <a href="VraagUpdate.php? updateid=<?= $idQuestions ?>"><button class="update">Bewerken</button></a>
+                                <a href="#" onclick="confirmDelete(<?= $idQuestions ?>)"><button class="delete">Verwijderen</button></a>
                             </div>
                         </li>
                 <?php
@@ -92,13 +94,13 @@ $categories = $categoryResult->fetch_all(MYSQLI_ASSOC);
     </div>
     <script>
         function redirectToAddQuestion() {
-            window.location.href = '<?php echo $url ?>Pages/admin/VraagAanmaken.php';
+            window.location.href = '<?= $url ?>Pages/admin/VraagAanmaken.php';
         }
 
         function confirmDelete(questionId) {
             let confirmDelete = confirm("Weet je zeker dat je deze vraag wilt verwijderen?");
             if (confirmDelete) {
-                window.location.href = '<?php echo $url ?>Pages/admin/VraagDelete.php?deleteid=' + questionId;
+                window.location.href = '<?= $url ?>Pages/admin/VraagDelete.php?deleteid=' + questionId;
             }
         }
     </script>

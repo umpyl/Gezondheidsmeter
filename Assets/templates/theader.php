@@ -70,14 +70,14 @@ function displayHeader()
             <ul>
                 <?php if ($user == 'admin') : ?>
                     <li>
-                        <a href="<?php echo $url . "Pages/" . $user . "/gebruikers/" ?>"><button <?php if ($oUrl == ($url . "Pages/" . $user . "/gebruikers/")) : ?> class="active" <?php endif ?>>Users</button></a>
+                        <a href="<?= $url . "Pages/" . $user . "/gebruikers/" ?>"><button <?php if ($oUrl == ($url . "Pages/" . $user . "/gebruikers/")) : ?> class="active" <?php endif ?>>Gebruikers</button></a>
                     </li>
                 <?php endif ?>
                 <li>
-                    <a href="<?php echo $url . "Pages/" . $user . "/Homepage.php" ?>"><button <?php if ($oUrl == ($url . "Pages/" . $user . "/Homepage.php")) : ?> class="active" <?php endif ?>>Dashboard</button></a>
+                    <a href="<?= $url . "Pages/" . $user . "/Homepage.php" ?>"><button <?php if ($oUrl == ($url . "Pages/" . $user . "/Homepage.php")) : ?> class="active" <?php endif ?>>Dashboard</button></a>
                 </li>
                 <li>
-                    <a href="<?php echo $url . "Pages/logout.php" ?>"><button>Logout</button></a>
+                    <a href="<?= $url . "Pages/logout.php" ?>"><button>Uitloggen</button></a>
                 </li>
             </ul>
         </nav>
@@ -89,8 +89,8 @@ function GetScripts()
 {
     global $url;
 ?>
-    <script type="text/javascript" src="<?php echo $url ?>Assets/JS/header.js" defer></script>
-    <script type="text/javascript" src="<?php echo $url ?>Assets/JS/darkmode.js" defer></script>
+    <script type="text/javascript" src="<?= $url ?>Assets/JS/header.js" defer></script>
+    <script type="text/javascript" src="<?= $url ?>Assets/JS/darkmode.js" defer></script>
 <?php
 }
 

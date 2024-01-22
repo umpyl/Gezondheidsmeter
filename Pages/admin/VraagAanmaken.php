@@ -54,8 +54,8 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
     <div class="wrapper">
         <form action="" method="POST">
             <div class="form-group">
-                <input type="text" id="question" name="question" placeholder="Question" required>
-                <label for="question">Question</label>
+                <input type="text" id="question" name="question" placeholder="Vraag" required>
+                <label for="question">Vraag</label>
                 <span class="underline"></span>
             </div>
             <div class="form-group">
@@ -63,11 +63,11 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                 <div class="optionsWrapper">
                     <div class="optionWrapper">
                         <input type="radio" id="daily" value="1" name="daily" checked>
-                        <label for="daily">Daily</label>
+                        <label for="daily">Dagelijks</label>
                     </div>
                     <div class="optionWrapper">
                         <input type="radio" id="weekly" value="0" name="daily">
-                        <label for="weekly">Weekly</label>
+                        <label for="weekly">Wekelijks</label>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                 <h2>Categorie</h2>
                 <div class="optionsWrapper">
                     <div class="dropdown">
-                        <input type="text" class="filter" placeholder="Search">
+                        <input type="text" class="filter" placeholder="Zoek">
                         <ul class="optionWrapper">
                             <?php foreach ($rows as $row) {
                                 echo '<li>
@@ -88,7 +88,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                     </div>
                 </div>
             </div>
-            <button type="submit" name="submit">Submit</button>
+            <button type="submit" name="submit">Vraag aanmaken</button>
         </form>
     </div>
 </body>
