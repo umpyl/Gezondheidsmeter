@@ -31,7 +31,7 @@ $userResult = $userResult->fetch_all(MYSQLI_ASSOC);
             <?php foreach ($userResult as $user) : ?>
                 <div class="card">
                     <h2><?= $user["Name"] ?></h2>
-                    <p><?= $user["Mail"] ?></p>
+                    <a href="mailto:<?= $user["Mail"] ?>"><?= $user["Mail"] ?></a>
                     <div class="form-group">
                         <div class="optionsWrapper">
                             <div class="dropdown">

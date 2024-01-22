@@ -243,9 +243,10 @@ form {
 }
 
 .form-group .optionsWrapper .dropdown .optionWrapper {
-	height: calc((0.5rem + 0.5rem + 1.3125em) * 3);
+	max-height: calc((0.5rem + 0.5rem + 1.3125em) * 3);
 	overflow: auto;
 	scroll-behavior: smooth;
+	box-shadow: 0 0 7px black;
 }
 
 .dropdown {
@@ -282,7 +283,6 @@ form {
 	display: block;
 	padding: 0.5rem 1rem;
 	background: var(--secondair-background-color);
-	filter: brightness(120%);
 }
 
 [theme-mode="light"] .dropdown .optionWrapper > li:hover {
@@ -290,7 +290,7 @@ form {
 }
 
 [theme-mode="dark"] .dropdown .optionWrapper > li:hover {
-	filter: brightness(150%);
+	filter: brightness(120%);
 }
 
 .form-group > input[type="text"],
@@ -386,7 +386,7 @@ input[type="radio"] {
 	display: none;
 }
 
-input[type="radio"] + label {
+.optionsWrapper > .optionWrapper input[type="radio"] + label {
 	color: var(--main-color);
 	display: flex;
 	align-items: center;
@@ -396,11 +396,11 @@ input[type="radio"] + label {
 	z-index: 1;
 }
 
-input[type="radio"]:hover + label {
+.optionsWrapper > .optionWrapper input[type="radio"]:hover + label {
 	color: var(--main-bright-color);
 }
 
-input[type="radio"] + label::before {
+.optionsWrapper > .optionWrapper input[type="radio"] + label::before {
 	border-radius: 100vw;
 	content: "";
 	position: absolute;
@@ -413,16 +413,16 @@ input[type="radio"] + label::before {
 	transition: all 0.25s cubic-bezier(0.25, 0.25, 0.5, 1.9);
 }
 
-input[type="radio"] + label {
+.optionsWrapper > .optionWrapper input[type="radio"] + label {
 	padding: 1rem 1rem 1rem 2rem;
 }
 
-input[type="radio"]:checked + label {
+.optionsWrapper > .optionWrapper input[type="radio"]:checked + label {
 	color: black;
 	padding: 1rem 1.5rem 1rem 1.5rem;
 }
 
-input[type="radio"]:checked + label::before {
+.optionsWrapper > .optionWrapper input[type="radio"]:checked + label::before {
 	width: 100%;
 	left: 0;
 	height: 100%;
