@@ -1,9 +1,7 @@
 let currentQuestion = 1;
 let answer = 0;
 
-document.addEventListener("DOMContentLoaded", LoadQuestion());
-
-function LoadQuestion() {
+function loadQuestion() {
 	document.getElementById("currentQuestion").innerText = currentQuestion;
 	document.getElementById("total").innerText = QuestionCount;
 	document.getElementById("question").innerText = questionsArray[currentQuestion - 1].Question;
@@ -15,6 +13,7 @@ function checkanswer() {
 	for (i = 0; i < buttons.length; i++) {
 		if (buttons[i].checked) {
 			answer = buttons[i].value;
+			buttons[i].checked = false;
 			break;
 		}
 	}
@@ -25,15 +24,19 @@ function UpdateCurrentQuestion(action) {
 		currentQuestion--;
 	}
 
-	if (action === "next" && currentQuestion < QuestionCount) {
-		currentQuestion++;
-
-		let questionId = questionsArray[currentQuestion - 2].idQuestions;
+	if (action === "next") {
+		let questionId = questionsArray[currentQuestion - 1].idQuestions;
+		console.log(questionId);
 		checkanswer();
-
 		sendAnswerToServer(questionId, userId, answer);
+
+		if (currentQuestion < QuestionCount) {
+			currentQuestion++;
+		} else {
+			console.log("Last question");
+		}
 	}
-	LoadQuestion();
+	loadQuestion();
 }
 
 function sendAnswerToServer(questionId, userId, answer) {
@@ -49,7 +52,9 @@ function sendAnswerToServer(questionId, userId, answer) {
 		}),
 	})
 		.then((response) => response.text())
-		.then((data) => {})
+		.then((data) => {
+			console.log(data);
+		})
 		.catch((error) => {
 			console.error("Error:", error);
 		});
