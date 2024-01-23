@@ -64,11 +64,7 @@ $categories = $categoryResult->fetch_all(MYSQLI_ASSOC);
                         $category = ucfirst($categories[array_search($row["category_id"], array_column($categories, "id"))]["category"]);
                         $index++;
                     ?>
-                        <li class="question" data-recuring="<?php if ($Daily == 1) : ?>
-                                                                Dagelijks
-                                                            <?php else : ?>
-                                                               Wekelijks
-                                                            <?php endif ?>" data-category="<?= $category ?>" style="view-transition-name: conf-<?= $index ?>">
+                        <li class="question" data-recuring="<?php if ($Daily == 1) : ?>Daily<?php else : ?>Weekly<?php endif ?>" data-category="<?= $category ?>" style="view-transition-name: conf-<?= $index ?>">
                             <div class="details">
                                 <span>
                                     <?php if ($Daily == 1) : ?>

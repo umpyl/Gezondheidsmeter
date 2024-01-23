@@ -17,23 +17,20 @@ if (isset($_POST["submit"])) {
 
 
     if ($result) {
-        echo "<html>
-        <head>
-        <title>Laden...</title>
-        <script>
-        setTimeout(function() {
-            window.location.href = '" . $url . "Pages/login.php';
-        }, 3000); // 3000 milliseconds = 3 seconds
-        </script>
-        </head>
-        <body>
-        <div style='text-align: center; padding: 50px;'>
-        <h2>Aan het laden...</h2>
-        <!-- leuek elemente invoegen -->
-        </div>
-        </body>
-        </html>";
-        exit;
+        $stmt = $connection->prepare("SELECT * FROM `gezond_users` WHERE `Name` = ? AND `Password` = ?");
+        $stmt->bind_param("ss", $Name, $Password);
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            $_SESSION["naam"] = $Name;
+            $_SESSION["admin"] = false;
+            $_SESSION["userId"] = $row["idUsers"];
+            header("Location: " . $url . "Pages/gebruiker/Homepage.php");
+            exit();
+        }
     } else {
         echo "Niet gelukt! Raadpleeg ontwikkelaar";
     }
